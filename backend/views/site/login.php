@@ -14,11 +14,11 @@ $this->title = 'Login'; ?>
                             <div class="text-center">
                                 <div>
                                     <a href="<?= Yii::$app->homeUrl; ?>" class="logo">
-                                        <img src="<?= $this->imagesUrl('images/version.png') ?>" class="w-50" alt="logo">
+                                        <img src="<?= $this->imagesUrl('images/11.png') ?>" class="w-50" alt="logo">
                                     </a>
                                 </div>
                                 <h4 class="font-size-18 mt-4">Xush kelibsiz!</h4>
-                                <p class="text-muted">Ilmiy-amaliy o'quv markazga</p>
+                                <p class="text-muted">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</p>
                             </div>
 
                             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>

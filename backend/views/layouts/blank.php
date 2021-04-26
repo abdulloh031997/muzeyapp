@@ -15,7 +15,7 @@ $this->beginPage(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?= $this->imagesUrl('images/favicon.ico'); ?>">
     <?php $this->registerCsrfMetaTags(); ?>
-    <title><?= Html::encode($this->title); ?> &bull; AVLO UZ</title>
+    <title><?= Html::encode($this->title); ?> &bull; Muzey</title>
     <?php $this->head(); ?>
 </head>
 

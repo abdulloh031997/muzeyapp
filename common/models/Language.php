@@ -8,11 +8,13 @@ use Yii;
  * This is the model class for table "language".
  *
  * @property int $id
- * @property string $name
- * @property string $code
- * @property int $status
- * @property int|null $created_at
- * @property int|null $updated_at
+ * @property string|null $name
+ * @property string|null $lang_code
+ * @property string|null $locale
+ * @property int|null $rtl
+ * @property int|null $default
+ * @property int|null $sort
+ * @property int|null $status
  */
 class Language extends \yii\db\ActiveRecord
 {
@@ -30,11 +32,10 @@ class Language extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'code'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 255],
-            [['code'], 'string', 'max' => 32],
-            [['name'], 'unique'],
+            [['rtl', 'default', 'sort', 'status'], 'integer'],
+            [['name'], 'string', 'max' => 100],
+            [['lang_code'], 'string', 'max' => 10],
+            [['locale'], 'string', 'max' => 50],
         ];
     }
 
@@ -46,10 +47,12 @@ class Language extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'code' => 'Code',
+            'lang_code' => 'Lang Code',
+            'locale' => 'Locale',
+            'rtl' => 'Rtl',
+            'default' => 'Default',
+            'sort' => 'Sort',
             'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
         ];
     }
 }

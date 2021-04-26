@@ -17,8 +17,8 @@ class MenuSearch extends Menu
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'page_id', 'c_order', 'target_blank', 'status', 'visible_top', 'visible_side'], 'integer'],
-            [['name', 'link', 'slug'], 'safe'],
+            [['id', 'content_id', 'parent_id', 'target_blank', 'visible_top', 'status'], 'integer'],
+            [['name', 'language', 'link', 'c_order', 'slug'], 'safe'],
         ];
     }
 
@@ -59,17 +59,17 @@ class MenuSearch extends Menu
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'content_id' => $this->content_id,
             'parent_id' => $this->parent_id,
-            'page_id' => $this->page_id,
-            'c_order' => $this->c_order,
             'target_blank' => $this->target_blank,
-            'status' => $this->status,
             'visible_top' => $this->visible_top,
-            'visible_side' => $this->visible_side,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'language', $this->language])
             ->andFilterWhere(['like', 'link', $this->link])
+            ->andFilterWhere(['like', 'c_order', $this->c_order])
             ->andFilterWhere(['like', 'slug', $this->slug]);
 
         return $dataProvider;

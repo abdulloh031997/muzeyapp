@@ -19,29 +19,29 @@ use yii\helpers\Url; ?>
                         <i class="ri-layout-3-line"></i>
                         <span>POST</span>
                     </a>
-                    <ul class="sub-menu mm-collapse" aria-expanded="false" style="height: 0px;">
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Post</a></li>
+                    <ul class="sub-menu mm-collapse" aria-expanded="false">
+                        <li><a href="<?= Url::to(['category/index']); ?>">Category</a></li>
+                        <li><a href="<?= Url::to(['post/index']); ?>">Post</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="<?= Url::to(['/']); ?>" class="waves-effect">
+                    <a href="<?= Url::to(['impressions/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
                         <span>Ko'rgazmalar </span>
                     </a>
                 </li>
                 <li>
-                    <a href="<?= Url::to(['/']); ?>" class="waves-effect">
+                    <a href="<?= Url::to(['partner/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
                         <span>Xamkor Tashkilotlar</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<?= Url::to(['/']); ?>" class="waves-effect">
+                    <a href="<?= Url::to(['menu/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
                         <span>Bo'limlar</span>
                     </a>
-                    <a href="<?= Url::to(['/']); ?>" class="waves-effect">
+                    <a href="<?= Url::to(['team/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
                         <span>Team</span>
                     </a>
@@ -51,7 +51,7 @@ use yii\helpers\Url; ?>
                         <i class="ri-layout-3-line"></i>
                         <span>Sozlamalar</span>
                     </a>
-                    <ul class="sub-menu mm-collapse" aria-expanded="false" style="height: 0px;">
+                    <ul class="sub-menu mm-collapse" aria-expanded="false">
                         <li><a href="#">Tarjima so'zlar</a></li>
                         <li><a href="#">Till</a></li>
                         <li><a href="#">Banner</a></li>

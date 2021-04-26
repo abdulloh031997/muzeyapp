@@ -17,8 +17,8 @@ class BannerSearch extends Banner
     public function rules()
     {
         return [
-            [['id', 'content_id', 'status'], 'integer'],
-            [['name', 'language', 'image'], 'safe'],
+            [['id', 'content_id', 'sort', 'status'], 'integer'],
+            [['language', 'name', 'image'], 'safe'],
         ];
     }
 
@@ -60,11 +60,12 @@ class BannerSearch extends Banner
         $query->andFilterWhere([
             'id' => $this->id,
             'content_id' => $this->content_id,
+            'sort' => $this->sort,
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'language', $this->language])
+        $query->andFilterWhere(['like', 'language', $this->language])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;

@@ -10,22 +10,22 @@ use yii\helpers\Html;
             <div class="navbar-brand-box">
                 <a href="" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="<?= $this->imagesUrl('images/01.svg') ?>" alt="logo" height="40">
+                        <img src="<?= $this->imagesUrl('images/11.png') ?>" alt="logo" height="40">
                     </span>
                     <span class="logo-lg">
-                        <img src="<?= $this->imagesUrl('images/01.svg') ?>" alt="logo" height="40">
+                        <img src="<?= $this->imagesUrl('images/11.png') ?>" alt="logo" height="40">
                     </span>
                 </a>
 
                 <a href="" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="<?= $this->imagesUrl('images/01.svg') ?>" alt="logo" height="40">
+                        <img src="<?= $this->imagesUrl('images/11.png') ?>" alt="logo" height="40">
                         <!-- <span class="text-light text-center" style="font-family:'Times New Roman', Times, serif;font-size:24px;">
                             IM
                         </span> -->
                     </span>
                     <span class="logo-lg">
-                        <img src="<?= $this->imagesUrl('images/version.png') ?>" alt="logo" height="60">
+                        <img src="<?= $this->imagesUrl('images/1.png') ?>" alt="logo" height="60">
                     </span>
                 </a>
             </div>

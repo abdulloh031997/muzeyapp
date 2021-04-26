@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\grid\GridView;
+use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PostSearch */
@@ -10,9 +10,9 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Posts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-index card p-2">
+<div class="post-index">
 
-
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -25,65 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn'],
+            ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
+            'id',
+            'category_id',
             'title',
-//            'description',
-//            'body:ntext',
-//            'image',
+            'language',
+            'content_id',
+            //'description',
+            //'body:ntext',
+            //'image',
             //'status',
+            //'created_at',
+            //'updated_at',
 
-            [
-                'class' => 'kartik\grid\ActionColumn',
-                'template' => '{view} {update} {delete}',
-                'noWrap' => true,
-                'buttons' => [
-                    'view' => function ($url, $model, $key) {
-                        return Html::a(
-                            '<i class="fas fa-eye"></i>',
-                            ['view', 'id' => $model->id],
-                            [
-                                'data-id' => $model->id,
-                                // 'class' => 'btn btn-link',
-                                'title' => 'Кўриш',
-                                'aria-label' => 'Кўриш',
-
-                            ]
-                        );
-                    },
-
-                    'update' => function ($url, $model, $key) {
-                        return Html::a(
-                            '<i class="fas fa-edit"></i>',
-                            ['update', 'id' => $model->id],
-                            [
-                                'data-id' => $model->id,
-                                // 'class' => 'btn btn-link',
-                                'title' => 'Таҳрирлаш',
-                                'aria-label' => 'Таҳрирлаш',
-
-                            ]
-                        );
-                    },
-                    'delete' => function ($url, $model, $key) {
-                        return Html::a(
-                            '<i class="fas fa-trash"></i>',
-                            ['delete', 'id' => $model->id],
-                            [
-                                'class' => 'label btn-link',
-                                'data' => [
-                                    'confirm' => 'O\'chirish',
-                                    'method' => 'post',
-                                ],
-                                'title' => 'O\'chirish ',
-                                'aria-label' => 'O\'chirish',
-
-                            ]
-                        );
-                    },
-                ],
-            ],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
