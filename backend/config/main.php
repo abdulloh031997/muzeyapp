@@ -80,10 +80,10 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['en', 'it', 'fr', 'de', 'es'], // List all supported languages here
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
         ],
         'i18n' => [
             'translations' => [
