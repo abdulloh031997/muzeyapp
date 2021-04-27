@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components;
+namespace backend\components;
 
 use Yii;
 use yii\base\Behavior;

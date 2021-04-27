@@ -9,6 +9,17 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 $languages = active_langauges();
 $langs_array = ArrayHelper::map(\common\models\Language::find()->where(['status'=>1])->all(), 'lang_code', 'name');
+$category = ArrayHelper::map(\common\models\Category::find()->where(['status'=>1])->all(), 'id', 'name');
+if ($model->image == '') {
+    $path = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO1Y1OgPdmIoTzOTA1oYH2TuXAV9q2xD3mQw&usqp=CAU';
+} else {
+    $path = '@fronted_domain/' . $model->image;
+}
+if ($model->file != '') {
+    $path1 = Yii::getAlias('@fronted_domain'). '/' . $model->file;
+}else{
+    $path1 = '';
+}
 ?>
 <div class="post-form">
 
@@ -30,7 +41,7 @@ $langs_array = ArrayHelper::map(\common\models\Language::find()->where(['status'
                     <!-- Tab item -->
                     <?php foreach ($languages as $index => $lang): ?>
                     <?php if (!$model->isNewRecord) {
-                        $getValue = \common\models\Category::getValue($_GET['id'], $lang->lang_code);
+                        $getValue = \common\models\Post::getValue($_GET['id'], $lang->lang_code);
                     }?>
 
                         <div class="tab-pane <?=$index== 0 ? 'active' : '' ?>" id="general<?=$lang->lang_code?>" role="tabpanel">
@@ -65,9 +76,26 @@ $langs_array = ArrayHelper::map(\common\models\Language::find()->where(['status'
                 </div>
             </div>
             <div class="col-md-4">
-            <?= $form->field($model, 'category_id')->textInput() ?>
-            <br>
-            <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+                <div class="row mt-5 pt-1">
+                    <div class="col-md-12">
+                        <?= $form->field($model, 'category_id')->dropDownList($category,['class'=>'form-control select2']) ?>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div id="file" class="col-md-12">
+                                    <?=Html::img($path, [
+                                        'style' => 'width:100%; height:250px; margin-top: 5px; margin-left: -5px; border-radius:5px;',
+                                        'class' => '',
+                                    ])?>
+                                </div>
+                                <div class="mt-3">
+                                    <?= $form->field($model, 'file')->fileInput(['maxlength' => true,'class'=>'image_input form-control']) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-12">
                 <?= $form->field($model, 'status')->dropDownList($model->statusArray()) ?>
@@ -80,33 +108,27 @@ $langs_array = ArrayHelper::map(\common\models\Language::find()->where(['status'
         </div>
     </div>
     <?php ActiveForm::end(); ?>
-
-
-
-
-
-
-    <?php $form = ActiveForm::begin(); ?>
-
-    
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-
-    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-    
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
+<?php
+$this->registerJs(<<<JS
+    
+$(document).ready(function(){
+    var fileCollection = new Array();
+
+    $(document).on('change', '.image_input', function(e){
+        var files = e.target.files;
+        $.each(files, function(i, file){
+            fileCollection.push(file);
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e){
+                var template = '<img style="width:100%; height:auto;margin-top:20px; border-radius:5px;" src="'+e.target.result+'" class=""> ';
+                $('#file').html('');
+                $('#file').append(template);
+            };
+        });
+    });
+});
+JS
+);
+?>

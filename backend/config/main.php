@@ -22,14 +22,10 @@ return [
         ],
 
     ],
-    
-    'on beforeAction' => function ($event) {
-        \Yii::$app->language = \Yii::$app->getRequest()->getCookies()->getValue('language', 'ru');
-    },
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
-            'baseUrl'=>'/admin',
+            'baseUrl'=>'',
         ],
         'assetManager' => [
             'bundles' => [
@@ -87,12 +83,12 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'app*' => [
+                'template*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/translations',
+                    'basePath' => '@backend/messages',
                     'fileMap' => [
-                        'app' => 'app.php',
-                    ]
+                        'template' => 'template.php',
+                    ],
                 ],
             ],
         ],

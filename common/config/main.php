@@ -4,7 +4,7 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@filepath'=>'@frontend/web',
-	    '@fronted_domain' => 'https://ilmiy.dtm.uz',
+	    '@fronted_domain' => 'http://muzey.loc',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [

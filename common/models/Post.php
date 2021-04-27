@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use backend\components\UploadBehavior;
 
 /**
  * This is the model class for table "post".
@@ -26,12 +27,24 @@ class Post extends \yii\db\ActiveRecord
     const ACTIVE = 1;
     const BANNED = 5;
     const PENDING = 0;
+    public $file;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'post';
+    }
+    public function behaviors(){
+        return [
+            
+            [
+                'class' => UploadBehavior::className(),
+                'imageFile' => 'file',
+                'photo' => 'image',
+                'path' => 'uploads/post',
+            ],
+        ];
     }
 
     /**
@@ -45,6 +58,7 @@ class Post extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'language', 'description', 'image'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            ['file', 'image', 'skipOnEmpty' => $this->image ? false: true, 'extensions' => 'png, jpeg, jpg, gif', 'maxSize' => 1024*1024*10], // 10 mb
         ];
     }
 
@@ -128,5 +142,9 @@ class Post extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+    public function getLogo()
+    {
+        return ($this->image) ? '@fronted_domain/' . $this->image : '@fronted_domain/uploads/no-image.png';
     }
 }

@@ -15,6 +15,41 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
+    public function registerJs($file)
+    {
+        if ($file) {
+            $bundle = \backend\assets\AppAsset::register(\Yii::$app->view);
+
+            if (is_array($file)) {
+                foreach ($file as $fi) {
+                    $bundle->js[] = $fi;
+                }
+            } else {
+                $bundle->js[] = $file;
+            }
+        }
+    }
+
+    /**
+     * Register CSS file or files
+     *
+     * @param [type] $file
+     * @return void
+     */
+    public function registerCss($file)
+    {
+        if ($file) {
+            $bundle = \backend\assets\AppAsset::register(\Yii::$app->view);
+
+            if (is_array($file)) {
+                foreach ($file as $fi) {
+                    $bundle->css[] = $fi;
+                }
+            } else {
+                $bundle->css[] = $file;
+            }
+        }
+    }
     /**
      * {@inheritdoc}
      */
@@ -80,12 +115,14 @@ class PostController extends Controller
                 $model2->description = $model->description[$lang->lang_code];
                 $model2->body = $model->body[$lang->lang_code];
                 $model2->status = $model->status;
-                $model2->image = $model->image;
+                $model2->category_id = $model->category_id;
+                $model2->file = $model->image;
                 $model2->content_id = $SiteContent->id;
                 $model2->save();
             } 
                 return $this->redirect(['index']);
         }
+        
 
         return $this->render('create', [
             'model' => $model,
@@ -103,8 +140,24 @@ class PostController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 =  Post::findOne([
+                    'content_id'=>$model->content_id,
+                    'language'=>$lang->lang_code
+                ]);
+                $model2->title = $model->title[$lang->lang_code];
+                $model2->description = $model->description[$lang->lang_code];
+                $model2->body = $model->body[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->category_id = $model->category_id;
+                $model2->file = $model->image;
+                $model2->save();
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -135,7 +188,7 @@ class PostController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = Post::findOne(['content_id'=>$id])) !== null) {
             return $model;
         }
 
