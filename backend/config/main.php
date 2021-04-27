@@ -24,7 +24,7 @@ return [
     ],
     
     'on beforeAction' => function ($event) {
-        \Yii::$app->language = \Yii::$app->getRequest()->getCookies()->getValue('language', 'en');
+        \Yii::$app->language = \Yii::$app->getRequest()->getCookies()->getValue('language', 'ru');
     },
     'components' => [
         'request' => [
@@ -81,7 +81,7 @@ return [
         ],
         'urlManager' => [
             'class' => 'codemix\localeurls\UrlManager',
-            'languages' => ['en', 'it', 'fr', 'de', 'es'], // List all supported languages here
+            'languages' => ['ru','uz'], // List all supported languages here
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

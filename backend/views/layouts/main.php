@@ -38,7 +38,7 @@ AppAsset::register($this);
             <div class="content-header">
                 <?= \backend\widgets\BreadcrumbWidget::widget(); ?>
             </div>
-            <div class="container-fluid py-3">
+            <div class="container-fluid py-3 card">
                 <?= $content ?>
             </div>
         </div>

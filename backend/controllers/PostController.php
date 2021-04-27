@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Post;
 use backend\models\PostSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,9 +66,25 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'Post';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save(false);
+            $langs = active_langauges();
+            foreach ($langs as $index => $lang) {
+                $model2 = new Post();
+                $model2->language = $lang->lang_code;
+                $model2->title = $model->title[$lang->lang_code];
+                $model2->description = $model->description[$lang->lang_code];
+                $model2->body = $model->body[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->image = $model->image;
+                $model2->content_id = $SiteContent->id;
+                $model2->save();
+            } 
+                return $this->redirect(['index']);
         }
 
         return $this->render('create', [

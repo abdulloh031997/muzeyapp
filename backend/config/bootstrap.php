@@ -6,7 +6,7 @@ function debug($var){
 }
 function active_langauges()
 {
-   $activeLanguages = \common\models\Languages::find()->where(['status'=>1])->all();
+   $activeLanguages = \common\models\Language::find()->where(['status'=>1])->all();
    return $activeLanguages;
 }
 function current_lang()

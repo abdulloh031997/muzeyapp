@@ -1,11 +1,13 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\CategorySearch */
 /* @var $form yii\widgets\ActiveForm */
+$lang =ArrayHelper::map(\common\models\Language::find()->where(['status'=>1])->all(), 'lang_code', 'name');
 ?>
 
 <div class="category-search">
@@ -22,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'language') ?>
+    <?= $form->field($model, 'language')->dropDownList($lang) ?>
 
     <?= $form->field($model, 'content_id') ?>
 

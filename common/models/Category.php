@@ -17,6 +17,9 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    const ACTIVE = 1;
+    const BANNED = 5;
+    const PENDING = 0;
     /**
      * {@inheritdoc}
      */
@@ -48,6 +51,52 @@ class Category extends \yii\db\ActiveRecord
             'content_id' => 'Content ID',
             'status' => 'Status',
         ];
+    }
+    public function getContent()
+    {
+        return $this->hasOne(SiteContent::className(), ['id' => 'content_id']);
+    }
+    public static function getValue($id,$lang_code)
+    {
+        $getValue = self::findOne(['content_id' => $id, 'language' => $lang_code]);
+        $name = (!empty($getValue->name)) ? $getValue->name : '';
+        return ['name' => $name];
+    }
+    public static function getTranslatedLanguages($content_id)
+    {
+        $model = self::findAll(['content_id' => $content_id]);
+        $langs = array();
+        foreach ($model as $mode) {
+            $langs[] = $mode->language;
+        }
+        return implode(' / ',$langs);
+
+    }
+    public function statusArray($key = null)
+    {
+        $array = [
+            self::ACTIVE => 'Active',
+            self::PENDING => 'Pending',
+            self::BANNED => 'Blocked',
+        ];
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        return $array;
+    }
+    public function getLanguageName()
+    {
+        return $this->hasOne(Language::className(), ['lang_code' => 'language']);
+    }
+    public static function getListCategory($lang = null){
+        
+        if (is_null($lang)) {
+            $lang = current_lang();
+        }
+        return self::find()->where(['status'=>1])->andWhere(['language'=>$lang])->select("name")
+            ->indexBy('id')->column();
     }
 
     /**
