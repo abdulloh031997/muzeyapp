@@ -27,34 +27,34 @@ use yii\helpers\Url; ?>
                 <li>
                     <a href="<?= Url::to(['impressions/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
-                        <span>Ko'rgazmalar </span>
+                        <span><?=\Yii::t('template', 'impressions');?> </span>
                     </a>
                 </li>
                 <li>
                     <a href="<?= Url::to(['partner/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
-                        <span>Xamkor Tashkilotlar</span>
+                        <span><?=\Yii::t('template', 'partner_organizations');?></span>
                     </a>
                 </li>
                 <li>
                     <a href="<?= Url::to(['menu/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
-                        <span>Bo'limlar</span>
+                        <span><?=\Yii::t('template', 'menu');?></span>
                     </a>
                     <a href="<?= Url::to(['team/index']); ?>" class="waves-effect">
                         <i class=" ri-shield-star-line"></i>
-                        <span>Team</span>
+                        <span> <?=\Yii::t('template', 'team');?></span>
                     </a>
                 </li>
                 <li class="">
                     <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
                         <i class="ri-layout-3-line"></i>
-                        <span>Sozlamalar</span>
+                        <span> <?=\Yii::t('template', 'settings');?></span>
                     </a>
                     <ul class="sub-menu mm-collapse" aria-expanded="false">
-                        <li><a href="#">Tarjima so'zlar</a></li>
-                        <li><a href="#">Till</a></li>
-                        <li><a href="#">Banner</a></li>
+                        <li><a href="#"> <?=\Yii::t('template', 'translate');?></a></li>
+                        <li><a href="#"> <?=\Yii::t('template', 'lang');?></a></li>
+                        <li><a href="#"> <?=\Yii::t('template', 'banner');?></a></li>
                     </ul>
                 </li>
 

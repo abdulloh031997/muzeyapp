@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Posts');
+$this->title = Yii::t('template', 'post');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h3><?= Html::encode($this->title) ?></h3>
 
         <p>
-        <?= Html::a(Yii::t('app', 'Add <i class="fa fa-plus"></i>'), ['create'], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('template', 'add'), ['create'], ['class' => 'btn btn-primary btn-sm']) ?>
         </p>
    </div>
 

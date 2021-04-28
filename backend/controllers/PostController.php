@@ -15,41 +15,6 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
-    public function registerJs($file)
-    {
-        if ($file) {
-            $bundle = \backend\assets\AppAsset::register(\Yii::$app->view);
-
-            if (is_array($file)) {
-                foreach ($file as $fi) {
-                    $bundle->js[] = $fi;
-                }
-            } else {
-                $bundle->js[] = $file;
-            }
-        }
-    }
-
-    /**
-     * Register CSS file or files
-     *
-     * @param [type] $file
-     * @return void
-     */
-    public function registerCss($file)
-    {
-        if ($file) {
-            $bundle = \backend\assets\AppAsset::register(\Yii::$app->view);
-
-            if (is_array($file)) {
-                foreach ($file as $fi) {
-                    $bundle->css[] = $fi;
-                }
-            } else {
-                $bundle->css[] = $file;
-            }
-        }
-    }
     /**
      * {@inheritdoc}
      */
@@ -106,7 +71,7 @@ class PostController extends Controller
             $SiteContent = new SiteContent();
             $SiteContent->type = 'Post';
             $SiteContent->created_by = Yii::$app->user->id;
-            $SiteContent->save(false);
+            $SiteContent->save();
             $langs = active_langauges();
             foreach ($langs as $index => $lang) {
                 $model2 = new Post();
@@ -116,7 +81,7 @@ class PostController extends Controller
                 $model2->body = $model->body[$lang->lang_code];
                 $model2->status = $model->status;
                 $model2->category_id = $model->category_id;
-                $model2->file = $model->image;
+                // $model2->file = $model->image;
                 $model2->content_id = $SiteContent->id;
                 $model2->save();
             } 
@@ -154,7 +119,7 @@ class PostController extends Controller
                 $model2->status = $model->status;
                 $model2->category_id = $model->category_id;
                 $model2->file = $model->image;
-                $model2->save();
+                $model2->save(false);
             }
 
             return $this->redirect(['index']);

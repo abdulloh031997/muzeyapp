@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Impressions;
 use backend\models\ImpressionsSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,13 +63,32 @@ class ImpressionsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    
     public function actionCreate()
     {
         $model = new Impressions();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'impressions';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save(false);
+            $langs = active_langauges();
+            foreach ($langs as $index => $lang) {
+                $model2 = new Impressions();
+                $model2->language = $lang->lang_code;
+                $model2->title = $model->title[$lang->lang_code];
+                $model2->description = $model->description[$lang->lang_code];
+                $model2->body = $model->body[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->file = $model->image;
+                $model2->date = $model->date;
+                $model2->content_id = $SiteContent->id;
+                $model2->save(false);
+            } 
+                return $this->redirect(['index']);
         }
+        
 
         return $this->render('create', [
             'model' => $model,
@@ -86,8 +106,24 @@ class ImpressionsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 =  Impressions::findOne([
+                    'content_id'=>$model->content_id,
+                    'language'=>$lang->lang_code
+                ]);
+                $model2->title = $model->title[$lang->lang_code];
+                $model2->description = $model->description[$lang->lang_code];
+                $model2->body = $model->body[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->file = $model->image;
+                $model2->date = $model->date;
+                $model2->save(false);
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -118,7 +154,7 @@ class ImpressionsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Impressions::findOne($id)) !== null) {
+        if (($model = Impressions::findOne(['content_id'=>$id])) !== null) {
             return $model;
         }
 

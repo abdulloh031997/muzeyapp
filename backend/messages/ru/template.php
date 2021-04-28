@@ -5,4 +5,13 @@ return [
     'bosh_sahifa' => 'Главная',
     'post' => 'Пост',
     'category' => 'Категория',
+    'impressions' => 'Выставки',
+    'partner_organizations' => 'Организации-партнеры',
+    'menu' => 'Меню',
+    'team' => 'Команда',
+    'settings' => 'Настройки',
+    'translate' => 'Переведенные слова',
+    'lang' => 'Языки',
+    'banner' => 'Баннер',
+    'add' => 'Добавлять <i class="fa fa-plus"></i>',
 ];

@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $langs = active_langauges();
 
-$this->title = Yii::t('app', 'Categories');
+$this->title = Yii::t('template', 'category');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
     </div>
     <div class="float-right"  >
-        <?= Html::a(Yii::t('app', 'Add <i class="fa fa-plus"></i>'), ['create'], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a(Yii::t('template', 'add'), ['create'], ['class' => 'btn btn-primary btn-sm'])  ?> 
     </div>
 
 </div>
