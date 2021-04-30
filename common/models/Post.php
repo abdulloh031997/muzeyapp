@@ -2,8 +2,8 @@
 
 namespace common\models;
 
+use common\components\UploadBehavior;
 use Yii;
-use backend\components\UploadBehavior;
 
 /**
  * This is the model class for table "post".

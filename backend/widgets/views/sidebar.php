@@ -52,9 +52,9 @@ use yii\helpers\Url; ?>
                         <span> <?=\Yii::t('template', 'settings');?></span>
                     </a>
                     <ul class="sub-menu mm-collapse" aria-expanded="false">
-                        <li><a href="#"> <?=\Yii::t('template', 'translate');?></a></li>
-                        <li><a href="#"> <?=\Yii::t('template', 'lang');?></a></li>
-                        <li><a href="#"> <?=\Yii::t('template', 'banner');?></a></li>
+                        <li><a href="<?= Url::to(['#']); ?>"> <?=\Yii::t('template', 'translate');?></a></li>
+                        <li><a href="<?= Url::to(['language/index']); ?>"> <?=\Yii::t('template', 'lang');?></a></li>
+                        <li><a href="<?= Url::to(['banner/index']); ?>"> <?=\Yii::t('template', 'banner');?></a></li>
                     </ul>
                 </li>
 

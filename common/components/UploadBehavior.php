@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\components;
+namespace common\components;
 
 use Yii;
 use yii\base\Behavior;
@@ -39,17 +39,15 @@ class UploadBehavior extends Behavior {
         if ($this->owner->{$this->imageFile}) {
             $this->deletePhoto();
             $this->uploadFile();
-
-//            $this->owner->{$this->imageFile} = null;
+        //    $this->owner->{$this->imageFile} = null;
 
         }
 
     }
 
-    public function afterDelete($event) {
-
+    public function afterDelete($event) 
+    {
         $this->deletePhoto();
-
     }
 
     public function uploadFile()
@@ -68,10 +66,10 @@ class UploadBehavior extends Behavior {
 
     public function deletePhoto() {
 
-        if (!empty($this->owner->{$this->photo})) {
+        if (!empty($this->owner->{$this->photo}))
+        {
             @unlink(Yii::getAlias('@filepath')."/".$this->owner->{$this->photo});
         }
-
     }
 
 }

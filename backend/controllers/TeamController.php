@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Team;
 use backend\models\TeamSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,10 +66,32 @@ class TeamController extends Controller
     public function actionCreate()
     {
         $model = new Team();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'team';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save();
+            $langs = active_langauges();
+            foreach ($langs as $index => $lang) {
+                $model2 = new Team();
+                $model2->language = $lang->lang_code;
+                $model2->fio = $model->fio[$lang->lang_code];
+                $model2->about = $model->about[$lang->lang_code];
+                $model2->position = $model->position[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->file = $model->image;
+                $model2->twitter = $model->twitter;
+                $model2->facebook = $model->facebook;
+                $model2->instagram = $model->instagram;
+                $model2->linkedin = $model->linkedin;
+                $model2->telegram = $model->telegram;
+                $model2->content_id = $SiteContent->id;
+                $model2->save();
+            } 
+                return $this->redirect(['index']);
         }
+        
 
         return $this->render('create', [
             'model' => $model,
@@ -86,8 +109,29 @@ class TeamController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 =  Team::findOne([
+                    'content_id'=>$model->content_id,
+                    'language'=>$lang->lang_code
+                ]);
+                $model2->fio = $model->fio[$lang->lang_code];
+                $model2->position = $model->position[$lang->lang_code];
+                $model2->about = $model->about[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->category_id = $model->category_id;
+                $model2->file = $model->image;
+                $model2->twitter = $model->twitter;
+                $model2->facebook = $model->facebook;
+                $model2->instagram = $model->instagram;
+                $model2->linkedin = $model->linkedin;
+                $model2->telegram = $model->telegram;
+                $model2->save(false);
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -118,7 +162,7 @@ class TeamController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Team::findOne($id)) !== null) {
+        if (($model = Team::findOne(['content_id'=>$id])) !== null) {
             return $model;
         }
 

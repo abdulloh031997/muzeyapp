@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use backend\components\UploadBehavior;
+use common\components\UploadBehavior;
 use Yii;
 
 /**

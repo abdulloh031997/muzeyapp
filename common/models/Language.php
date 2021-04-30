@@ -55,4 +55,17 @@ class Language extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+    public function updateStatus($id, $status = 0)
+    {
+        $item = Language::findOne(['id' => $id]);
+
+        if ($item && is_numeric($status)) {
+            $item->status = $status;
+            $item->update(false);
+
+            return $item;
+        }
+
+        return false;
+    }
 }

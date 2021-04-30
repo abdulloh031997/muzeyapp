@@ -119,3 +119,26 @@ if ($model->file != '') {
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php
+$this->registerJs(<<<JS
+    
+$(document).ready(function(){
+    var fileCollection = new Array();
+
+    $(document).on('change', '.image_input', function(e){
+        var files = e.target.files;
+        $.each(files, function(i, file){
+            fileCollection.push(file);
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e){
+                var template = '<img style="width:100%; height:auto;margin-top:20px; border-radius:5px;" src="'+e.target.result+'" class=""> ';
+                $('#file').html('');
+                $('#file').append(template);
+            };
+        });
+    });
+});
+JS
+);
+?>

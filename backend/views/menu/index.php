@@ -63,7 +63,48 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'kartik\grid\ActionColumn',
+                'template' => '{view} {update} {delete}',
+                'noWrap' => true,
+                'buttons' => [
+
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('<i class="fas fa-eye"></i>', ['view', 'id' =>$model->content_id],
+                            [
+                                'data-id' => $model->id,
+                                // 'class' => 'btn btn-link',
+                                'title' => 'Кўриш',
+                                'aria-label' => 'Кўриш',
+
+                            ]);
+                    },
+
+                    'update' => function ($url, $model, $key) {
+                        return Html::a('<i class="fas fa-edit"></i>', ['update', 'id' => $model->content_id],
+                            [
+                                'data-id' => $model->id,
+                                // 'class' => 'btn btn-link',
+                                'title' => 'Таҳрирлаш',
+                                'aria-label' => 'Таҳрирлаш',
+
+                            ]);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a('<i class="fas fa-trash"></i>', ['delete', 'id' => $model->content_id],
+                            [
+                                'class' => 'label btn-link',
+                                'data' => [
+                                    'confirm' => 'Вы уверены, что хотите удалить этот элемент ?',
+                                    'method' => 'post',
+                                ],
+                                'title' => 'Ўчириш',
+                                'aria-label' => 'Ўчириш',
+
+                            ]);
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

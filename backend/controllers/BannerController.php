@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Banner;
 use backend\models\BannerSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,9 +66,25 @@ class BannerController extends Controller
     public function actionCreate()
     {
         $model = new Banner();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'Banner';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save(false);
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 = new Banner();
+                $model2->language = $lang->lang_code;
+                $model2->name = $model->name[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->file = $model->image;
+                $model2->sort = $model->sort;
+                $model2->content_id = $SiteContent->id;
+                $model2->save();
+            }
+                return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -86,8 +103,19 @@ class BannerController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 =  Banner::findOne([
+                    'content_id'=>$model->content_id,
+                    'language'=>$lang->lang_code
+                ]);
+                $model2->name = $model->name[$lang->lang_code];
+                $model2->save();
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -118,7 +146,7 @@ class BannerController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Banner::findOne($id)) !== null) {
+        if (($model = Banner::findOne(['content_id'=>$id])) !== null) {
             return $model;
         }
 

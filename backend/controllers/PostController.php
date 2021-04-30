@@ -81,7 +81,7 @@ class PostController extends Controller
                 $model2->body = $model->body[$lang->lang_code];
                 $model2->status = $model->status;
                 $model2->category_id = $model->category_id;
-                // $model2->file = $model->image;
+                $model2->file = $model->image;
                 $model2->content_id = $SiteContent->id;
                 $model2->save();
             } 
