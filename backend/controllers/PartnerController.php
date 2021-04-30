@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Partner;
 use backend\models\PartnerSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,12 +63,38 @@ class PartnerController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    // public function actionCreate()
+    // {
+    //     $model = new Partner();
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     }
+
+    //     return $this->render('create', [
+    //         'model' => $model,
+    //     ]);
+    // }
     public function actionCreate()
     {
         $model = new Partner();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'category';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save(false);
+            $langs = active_langauges();
+            foreach ($langs as $index => $lang) {
+                $model2 = new Partner();
+                $model2->language = $lang->lang_code;
+                $model2->name = $model->name[$lang->lang_code];
+                $model2->status = $model->status;
+                $model2->file = $model->image;
+                $model2->content_id = $SiteContent->id;
+                $model2->save();
+            }
+                return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -82,12 +109,35 @@ class PartnerController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
+
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     }
+
+    //     return $this->render('update', [
+    //         'model' => $model,
+    //     ]);
+    // }
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 =  Partner::findOne([
+                    'content_id'=>$model->content_id,
+                    'language'=>$lang->lang_code
+                ]);
+                $model2->name = $model->name[$lang->lang_code];
+                $model2->save();
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -118,7 +168,7 @@ class PartnerController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Partner::findOne($id)) !== null) {
+        if (($model = Partner::findOne(['content_id'=>$id])) !== null) {
             return $model;
         }
 

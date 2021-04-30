@@ -72,7 +72,7 @@ class ImpressionsController extends Controller
             $SiteContent = new SiteContent();
             $SiteContent->type = 'impressions';
             $SiteContent->created_by = Yii::$app->user->id;
-            $SiteContent->save(false);
+            $SiteContent->save();
             $langs = active_langauges();
             foreach ($langs as $index => $lang) {
                 $model2 = new Impressions();
@@ -84,7 +84,7 @@ class ImpressionsController extends Controller
                 $model2->file = $model->image;
                 $model2->date = $model->date;
                 $model2->content_id = $SiteContent->id;
-                $model2->save(false);
+                $model2->save();
             } 
                 return $this->redirect(['index']);
         }
@@ -120,7 +120,7 @@ class ImpressionsController extends Controller
                 $model2->status = $model->status;
                 $model2->file = $model->image;
                 $model2->date = $model->date;
-                $model2->save(false);
+                $model2->save();
             }
 
             return $this->redirect(['index']);

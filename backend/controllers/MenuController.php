@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Menu;
 use backend\models\MenuSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,9 +66,30 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model = new Menu();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'Menu';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save(false);
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 = new Menu();
+
+                $model2->language = $lang->lang_code;
+                $model2->name = $model->name[$lang->lang_code];
+                $model2->c_order = $model->c_order;
+                if (is_numeric($model->parent_id[$lang->lang_code])) {
+                    $model2->parent_id = $model->parent_id[$lang->lang_code];
+                } else {
+                    $model2->parent_id = 0;
+                }
+                $model2->link = $model->link;
+                $model2->content_id = $SiteContent->id;
+                $model2->save(false);
+        }
+        return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -86,8 +108,20 @@ class MenuController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 =  Menu::findOne([
+                    'content_id'=>$model->content_id,
+                    'language'=>$lang->lang_code
+                ]);
+                $model2->name = $model->name[$lang->lang_code];
+                $model2->c_order = $model->c_order;
+                $model2->save(false);
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -118,7 +152,7 @@ class MenuController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Menu::findOne($id)) !== null) {
+        if (($model = Menu::findOne(['content_id'=>$id])) !== null) {
             return $model;
         }
 
