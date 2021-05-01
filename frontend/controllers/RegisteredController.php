@@ -64,20 +64,20 @@ class RegisteredController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
-        $model = $this->findModel($id);
-        if (isset($model->user_id)){
-            $model->paidCheck();
-            return $this->render('view-d', ['model' => $model]);
-        }
-        else{
-            return $this->render('view', [
-                'model' =>$model
-            ]);
-        }
+    // public function actionView($id)
+    // {
+    //     $model = $this->findModel($id);
+    //     if (isset($model->user_id)){
+    //         $model->paidCheck();
+    //         return $this->render('view-d', ['model' => $model]);
+    //     }
+    //     else{
+    //         return $this->render('view', [
+    //             'model' =>$model
+    //         ]);
+    //     }
 
-    }
+    // }
     public function actionViewD($id)
     {
 
@@ -92,25 +92,25 @@ class RegisteredController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($type)
-    {
-        $model = Registered::findOne(['user_id' => Yii::$app->user->identity->id, 'type' => $type]);
-        if (!empty($model))
-            return $this->redirect('/registered/'.$model->id);
-        $model = new Registered();
+    // public function actionCreate($type)
+    // {
+    //     $model = Registered::findOne(['user_id' => Yii::$app->user->identity->id, 'type' => $type]);
+    //     if (!empty($model))
+    //         return $this->redirect('/registered/'.$model->id);
+    //     $model = new Registered();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->type = $type;
-            $model->user_id = Yii::$app->user->identity->id;
-            if ( $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        }
+    //     if ($model->load(Yii::$app->request->post())) {
+    //         $model->type = $type;
+    //         $model->user_id = Yii::$app->user->identity->id;
+    //         if ( $model->save()) {
+    //             return $this->redirect(['view', 'id' => $model->id]);
+    //         }
+    //     }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+    //     return $this->render('create', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Updates an existing Registered model.
@@ -153,14 +153,14 @@ class RegisteredController extends Controller
      * @return Registered the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Registered::findOne($id)) !== null) {
-            return $model;
-        }
+    // protected function findModel($id)
+    // {
+    //     if (($model = Registered::findOne($id)) !== null) {
+    //         return $model;
+    //     }
 
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-    }
+    //     throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    // }
     public function actionPrint($id)
     {
 

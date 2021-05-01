@@ -94,25 +94,14 @@ class SiteController extends Controller
     }
     public function actionNews()
     {
-        $data = Post::find()->asArray()->limit(3)->all();
-        return $this->render('news',compact('data'));
+        return $this->render('news');
     }
-    public function actionInnerNews($id)
+    public function actionInnerNews()
     {
-        $data_inner = Post::find()->where(['id'=>$id])->asArray()->one();
-        return $this->render('inner-news',compact('data_inner'));
+        
+        return $this->render('inner-news');
     }
-    public function actionKurslar($id)
-    {
-        $kursname = CoursCategory::find()->where(['id'=>$id])->one();
-        $kurslar = Cours::find()->where(['category_id'=>$id])->asArray()->all();
-        return $this->render('kurslar',compact('kurslar','kursname'));
-    }
-    public function actionInner($id)
-    {
-        $data = CoursBlock::find()->where(['cours_id' =>$id])->asArray()->all();
-        return $this->render('inner',compact('data'));
-    }
+ 
 
     /**
      * Logs in a user.
