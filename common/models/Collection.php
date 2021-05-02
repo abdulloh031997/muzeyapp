@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\UploadBehavior;
 use Yii;
 
 /**
@@ -23,12 +24,28 @@ use Yii;
  */
 class Collection extends \yii\db\ActiveRecord
 {
+    const ACTIVE = 1;
+    const BANNED = 5;
+    const PENDING = 0;
+
+    public $file;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'collection';
+    }
+    public function behaviors(){
+        return [
+            
+            [
+                'class' => UploadBehavior::className(),
+                'imageFile' => 'file',
+                'photo' => 'image',
+                'path' => 'uploads/collection',
+            ],
+        ];
     }
 
     /**
@@ -41,6 +58,7 @@ class Collection extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['language', 'author', 'technique', 'materials', 'size'], 'string', 'max' => 255],
             [['collection_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => CollectionCategory::className(), 'targetAttribute' => ['collection_category_id' => 'id']],
+            ['file', 'image', 'skipOnEmpty' => $this->image ? false: true, 'extensions' => 'png, jpeg, jpg, gif', 'maxSize' => 1024*1024*10], // 10 mb
         ];
     }
 
@@ -63,6 +81,52 @@ class Collection extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+    public function getContent()
+    {
+        return $this->hasOne(SiteContent::className(), ['id' => 'content_id']);
+    }
+    public static function getValue($id,$lang_code)
+    {
+        $getValue = self::findOne(['content_id' => $id, 'language' => $lang_code]);
+        $name = (!empty($getValue->name)) ? $getValue->name : '';
+        return ['name' => $name];
+    }
+    public static function getTranslatedLanguages($content_id)
+    {
+        $model = self::findAll(['content_id' => $content_id]);
+        $langs = array();
+        foreach ($model as $mode) {
+            $langs[] = $mode->language;
+        }
+        return implode(' / ',$langs);
+
+    }
+    public function statusArray($key = null)
+    {
+        $array = [
+            self::ACTIVE => 'Active',
+            self::PENDING => 'Pending',
+            self::BANNED => 'Blocked',
+        ];
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        return $array;
+    }
+    public function getLanguageName()
+    {
+        return $this->hasOne(Language::className(), ['lang_code' => 'language']);
+    }
+    public static function getListCategory($lang = null){
+        
+        if (is_null($lang)) {
+            $lang = current_lang();
+        }
+        return self::find()->where(['status'=>1])->andWhere(['language'=>$lang])->select("name")
+            ->indexBy('id')->column();
+    }
 
     /**
      * Gets query for [[CollectionCategory]].
@@ -73,4 +137,9 @@ class Collection extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CollectionCategory::className(), ['id' => 'collection_category_id']);
     }
+    public function getLogo()
+    {
+        return ($this->image) ? '@fronted_domain/' . $this->image : '@fronted_domain/uploads/no-image.png';
+    }
+
 }

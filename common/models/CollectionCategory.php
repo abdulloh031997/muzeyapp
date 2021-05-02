@@ -130,4 +130,8 @@ class CollectionCategory extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Collection::className(), ['collection_category_id' => 'id']);
     }
+    public function getLogo()
+    {
+        return ($this->image) ? '@fronted_domain/' . $this->image : '@fronted_domain/uploads/no-image.png';
+    }
 }
