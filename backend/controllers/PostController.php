@@ -119,7 +119,7 @@ class PostController extends Controller
                 $model2->status = $model->status;
                 $model2->category_id = $model->category_id;
                 $model2->file = $model->image;
-                $model2->save(false);
+                $model2->save();
             }
 
             return $this->redirect(['index']);

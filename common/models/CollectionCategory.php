@@ -6,32 +6,32 @@ use common\components\UploadBehavior;
 use Yii;
 
 /**
- * This is the model class for table "impressions".
+ * This is the model class for table "collection_category".
  *
  * @property int $id
- * @property string|null $title
  * @property string|null $language
  * @property int|null $content_id
- * @property string|null $description
- * @property string|null $body
+ * @property string|null $name
  * @property string|null $image
  * @property int|null $status
- * @property string|null $date
  * @property string|null $created_at
  * @property string|null $updated_at
+ *
+ * @property Collection[] $collections
  */
-class Impressions extends \yii\db\ActiveRecord
+class CollectionCategory extends \yii\db\ActiveRecord
 {
-    public $file;
     const ACTIVE = 1;
     const BANNED = 5;
     const PENDING = 0;
+
+    public $file;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'impressions';
+        return 'collection_category';
     }
     public function behaviors(){
         return [
@@ -40,7 +40,7 @@ class Impressions extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'imageFile' => 'file',
                 'photo' => 'image',
-                'path' => 'uploads/impressions',
+                'path' => 'uploads/collection_category',
             ],
         ];
     }
@@ -52,9 +52,8 @@ class Impressions extends \yii\db\ActiveRecord
     {
         return [
             [['content_id', 'status'], 'integer'],
-            [['body'], 'string'],
-            [['date', 'created_at', 'updated_at'], 'safe'],
-            [['title', 'language', 'description', 'image'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],
+            [['language', 'name', 'image'], 'string', 'max' => 255],
             ['file', 'image', 'skipOnEmpty' => $this->image ? false: true, 'extensions' => 'png, jpeg, jpg, gif', 'maxSize' => 1024*1024*10], // 10 mb
         ];
     }
@@ -66,18 +65,16 @@ class Impressions extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
             'language' => 'Language',
             'content_id' => 'Content ID',
-            'description' => 'Description',
-            'body' => 'Body',
+            'name' => 'Name',
             'image' => 'Image',
             'status' => 'Status',
-            'date' => 'Date',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
+
     public function getContent()
     {
         return $this->hasOne(SiteContent::className(), ['id' => 'content_id']);
@@ -85,14 +82,8 @@ class Impressions extends \yii\db\ActiveRecord
     public static function getValue($id,$lang_code)
     {
         $getValue = self::findOne(['content_id' => $id, 'language' => $lang_code]);
-        $title = (!empty($getValue->title)) ? $getValue->title : '';
-        $description = (!empty($getValue->description)) ? $getValue->description : '';
-        $body = (!empty($getValue->body)) ? $getValue->body : '';
-        return [
-            'title' => $title,
-            'description' => $description,
-            'body' => $body,
-        ];
+        $name = (!empty($getValue->name)) ? $getValue->name : '';
+        return ['name' => $name];
     }
     public static function getTranslatedLanguages($content_id)
     {
@@ -122,7 +113,7 @@ class Impressions extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Language::className(), ['lang_code' => 'language']);
     }
-    public static function getListImpressions($lang = null){
+    public static function getListCategory($lang = null){
         
         if (is_null($lang)) {
             $lang = current_lang();
@@ -130,8 +121,13 @@ class Impressions extends \yii\db\ActiveRecord
         return self::find()->where(['status'=>1])->andWhere(['language'=>$lang])->select("name")
             ->indexBy('id')->column();
     }
-    public function getLogo()
+    /**
+     * Gets query for [[Collections]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCollections()
     {
-        return ($this->image) ? '@fronted_domain/' . $this->image : '@fronted_domain/uploads/no-image.png';
+        return $this->hasMany(Collection::className(), ['collection_category_id' => 'id']);
     }
 }

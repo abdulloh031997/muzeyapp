@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use common\models\Cours;
 use common\models\CoursBlock;
 use common\models\CoursCategory;
+use common\models\Impressions;
 use common\models\Post;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -14,6 +15,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Partner;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -78,7 +80,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $post = Post::find()->where(['status'=>1])->limit(6)->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $partner = Partner::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $impressions = Impressions::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        return $this->render('index',compact('post','partner','impressions'));
     }
     public function actionCenter()
     {

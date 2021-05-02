@@ -14,4 +14,7 @@ return [
     'lang' => 'Языки',
     'banner' => 'Баннер',
     'add' => 'Добавлять <i class="fa fa-plus"></i>',
+    'collection'=>'Коллекция',
+    'logo'=>'Логотип',
+    'about'=>'О нас',
 ];

@@ -14,7 +14,7 @@ use yii\helpers\Url; ?>
                         <span><?=\Yii::t('template', 'bosh_sahifa');?></span>
                     </a>
                 </li>
-                <li class="">
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
                         <i class="ri-layout-3-line"></i>
                         <span><?=\Yii::t('template', 'post');?></span>
@@ -22,6 +22,16 @@ use yii\helpers\Url; ?>
                     <ul class="sub-menu mm-collapse" aria-expanded="false">
                         <li><a href="<?= Url::to(['category/index']); ?>"><?=\Yii::t('template', 'category');?></a></li>
                         <li><a href="<?= Url::to(['post/index']); ?>"><?=\Yii::t('template', 'post');?></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
+                        <i class="ri-layout-3-line"></i>
+                        <span><?=\Yii::t('template', 'collection');?></span>
+                    </a>
+                    <ul class="sub-menu mm-collapse" aria-expanded="false">
+                        <li><a href="<?= Url::to(['collection-category/index']); ?>"><?=\Yii::t('template', 'category');?></a></li>
+                        <li><a href="<?= Url::to(['collection/index']); ?>"><?=\Yii::t('template', 'collection');?></a></li>
                     </ul>
                 </li>
                 <li>
@@ -46,7 +56,7 @@ use yii\helpers\Url; ?>
                         <span> <?=\Yii::t('template', 'team');?></span>
                     </a>
                 </li>
-                <li class="">
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
                         <i class="ri-layout-3-line"></i>
                         <span> <?=\Yii::t('template', 'settings');?></span>
@@ -55,6 +65,8 @@ use yii\helpers\Url; ?>
                         <li><a href="<?= Url::to(['#']); ?>"> <?=\Yii::t('template', 'translate');?></a></li>
                         <li><a href="<?= Url::to(['language/index']); ?>"> <?=\Yii::t('template', 'lang');?></a></li>
                         <li><a href="<?= Url::to(['banner/index']); ?>"> <?=\Yii::t('template', 'banner');?></a></li>
+                        <li><a href="<?= Url::to(['logo/index']); ?>"> <?=\Yii::t('template', 'logo');?></a></li>
+                        <li><a href="<?= Url::to(['about/index']); ?>"> <?=\Yii::t('template', 'about');?></a></li>
                     </ul>
                 </li>
 

@@ -21,6 +21,9 @@ return[
     'banner' => 'Banner',
     'create_banner' => 'Qo\'shish Banner',
     'add' => 'Qo\'shish <i class="fa fa-plus"></i>',
+    'collection'=>'Kalleksiyalar',
+    'logo'=>'Logo',
+    'about'=>'Biz haqimizda',
     
     
 ];

@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Menu;
-use backend\models\MenuSearch;
-use common\models\SiteContent;
+use common\models\About;
+use backend\models\AboutSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MenuController implements the CRUD actions for Menu model.
+ * AboutController implements the CRUD actions for About model.
  */
-class MenuController extends Controller
+class AboutController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,12 @@ class MenuController extends Controller
     }
 
     /**
-     * Lists all Menu models.
+     * Lists all About models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MenuSearch();
+        $searchModel = new AboutSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Displays a single Menu model.
+     * Displays a single About model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,37 +58,16 @@ class MenuController extends Controller
     }
 
     /**
-     * Creates a new Menu model.
+     * Creates a new About model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Menu();
-        if ($model->load($post = Yii::$app->request->post())) {
+        $model = new About();
 
-            $SiteContent = new SiteContent();
-            $SiteContent->type = 'Menu';
-            $SiteContent->created_by = Yii::$app->user->id;
-            $SiteContent->save(false);
-            $langs = active_langauges();
-
-            foreach ($langs as $index => $lang) {
-                $model2 = new Menu();
-
-                $model2->language = $lang->lang_code;
-                $model2->name = $model->name[$lang->lang_code];
-                $model2->c_order = $model->c_order;
-                if (is_numeric($model->parent_id[$lang->lang_code])) {
-                    $model2->parent_id = $model->parent_id[$lang->lang_code];
-                } else {
-                    $model2->parent_id = 0;
-                }
-                $model2->link = $model->link;
-                $model2->content_id = $SiteContent->id;
-                $model2->save(false);
-        }
-        return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -98,7 +76,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Updates an existing Menu model.
+     * Updates an existing About model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -108,21 +86,8 @@ class MenuController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $langs = active_langauges();
-
-            foreach ($langs as $index => $lang) {
-                $model2 =  Menu::findOne([
-                    'content_id'=>$model->content_id,
-                    'language'=>$lang->lang_code
-                ]);
-                $model2->name = $model->name[$lang->lang_code];
-                $model2->c_order = $model->c_order;
-                $model2->link = $model->link;
-                $model2->save(false);
-            }
-
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -131,7 +96,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Deletes an existing Menu model.
+     * Deletes an existing About model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -145,15 +110,15 @@ class MenuController extends Controller
     }
 
     /**
-     * Finds the Menu model based on its primary key value.
+     * Finds the About model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Menu the loaded model
+     * @return About the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Menu::findOne(['content_id'=>$id])) !== null) {
+        if (($model = About::findOne($id)) !== null) {
             return $model;
         }
 

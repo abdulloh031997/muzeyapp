@@ -53,3 +53,7 @@ function cleartext($text) {
     $text = str_replace(' ', '%20', $text);
     return $text;
 }
+function current_lang()
+{
+    return Yii::$app->language;
+}

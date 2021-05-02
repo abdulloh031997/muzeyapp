@@ -30,7 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'title',
             'description',
-            'image',
+            [
+                'class'=>'\kartik\grid\DataColumn',
+                'attribute'=>'image',
+                'format' => 'html',
+                'value' => function($model){
+                    if($model->image!=''){
+                        return \yii\helpers\Html::img($model->getLogo(), ['width'=>129,'background'=>'black']);
+                    }
+                    else{
+                        return \yii\helpers\Html::img('https://howfix.net/wp-content/uploads/2018/02/sIaRmaFSMfrw8QJIBAa8mA-article-600x315.png', ['width'=>129,'background'=>'black']);
+                    }
+                }
+            ],
             'date',
             // 'id',
             // 'language',
