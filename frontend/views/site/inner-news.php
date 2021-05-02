@@ -26,13 +26,7 @@ use function PHPSTORM_META\type;
                         </p>
                     </div>
             </div>
-        <!-- <div class="col-md-6">
-            <a href="" style="text-decoration: none;">
-                <div class="card cards shadow">
-                    <h3 class="p-4 text-center">Koreys tili <br> o'quv kursi <span class="text-danger">(6 oylik)</span> </h3>
-                </div>
-            </a>
-        </div> -->
+    
     </div>
 </div>
 
