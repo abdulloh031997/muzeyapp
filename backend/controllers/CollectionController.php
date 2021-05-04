@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Collection;
 use backend\models\CollectionSearch;
+use common\models\SiteContent;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,9 +66,28 @@ class CollectionController extends Controller
     public function actionCreate()
     {
         $model = new Collection();
+        if ($model->load($post = Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $SiteContent = new SiteContent();
+            $SiteContent->type = 'Collection';
+            $SiteContent->created_by = Yii::$app->user->id;
+            $SiteContent->save(false);
+            $langs = active_langauges();
+
+            foreach ($langs as $index => $lang) {
+                $model2 = new Collection();
+                $model2->language = $lang->lang_code;
+                $model2->author = $model->author[$lang->lang_code];
+                $model2->collection_category_id = $model->collection_category_id;
+                $model2->status = $model->status;
+                $model2->file = $model->image;
+                $model2->technique = $model->technique[$lang->lang_code];
+                $model2->materials = $model->materials[$lang->lang_code];
+                $model2->size = $model->size[$lang->lang_code];
+                $model2->content_id = $SiteContent->id;
+                $model2->save();
+            }
+                return $this->redirect(['index']);
         }
 
         return $this->render('create', [

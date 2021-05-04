@@ -19,6 +19,7 @@ use Yii;
  * @property int|null $status
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @property string|null $image
  *
  * @property CollectionCategory $collectionCategory
  */
@@ -56,7 +57,7 @@ class Collection extends \yii\db\ActiveRecord
         return [
             [['collection_category_id', 'content_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['language', 'author', 'technique', 'materials', 'size'], 'string', 'max' => 255],
+            [['language', 'author', 'technique', 'materials','image', 'size'], 'string', 'max' => 255],
             [['collection_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => CollectionCategory::className(), 'targetAttribute' => ['collection_category_id' => 'id']],
             ['file', 'image', 'skipOnEmpty' => $this->image ? false: true, 'extensions' => 'png, jpeg, jpg, gif', 'maxSize' => 1024*1024*10], // 10 mb
         ];
@@ -88,8 +89,18 @@ class Collection extends \yii\db\ActiveRecord
     public static function getValue($id,$lang_code)
     {
         $getValue = self::findOne(['content_id' => $id, 'language' => $lang_code]);
-        $name = (!empty($getValue->name)) ? $getValue->name : '';
-        return ['name' => $name];
+        $author = (!empty($getValue->author)) ? $getValue->author : '';
+        $technique = (!empty($getValue->technique)) ? $getValue->technique : '';
+        $materials = (!empty($getValue->materials)) ? $getValue->materials : '';
+        $collection_category_id = (!empty($getValue->collection_category_id)) ? $getValue->collection_category_id : '';
+        $size = (!empty($getValue->size)) ? $getValue->size : '';
+        return [
+            'author' => $author,
+            'technique' => $technique,
+            'materials' => $materials,
+            'collection_category_id' => $collection_category_id,
+            'size' => $size,
+        ];
     }
     public static function getTranslatedLanguages($content_id)
     {
@@ -119,7 +130,7 @@ class Collection extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Language::className(), ['lang_code' => 'language']);
     }
-    public static function getListCategory($lang = null){
+    public static function getListCollection($lang = null){
         
         if (is_null($lang)) {
             $lang = current_lang();
