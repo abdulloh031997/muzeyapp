@@ -221,105 +221,24 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
+              <?php  foreach ($collection_category as $key => $one):?>
+                  <li data-filter=".one<?=$one['id']?>"><?=$one['name']?></li>
+              <?php endforeach ?>
             </ul>
           </div>
         </div>
 
         <div class="row portfolio-container">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/slides/2.jpg" class="img-fluid" alt="">
+          <?php foreach ($collection as $key => $one) { ?>
+          <div class="col-lg-4 col-md-6 portfolio-item one<?=$one['id']?>">
+            <img src="<?=$url.'/'.$one['image']?>" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <a href="assets/img/slides/2.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              <h4><?=$one['name']?></h4>
+              <a href="<?=$url.'/'.$one['image']?>" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class='bx bx-zoom-in'></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-show"></i></a>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="assets/img/slides/2.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <a href="assets/img/slides/" data-gall="portfolioGallery" class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/slides/3.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>App</p>
-              <a href="assets/img/slides/3.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <img src="assets/img/slides/4.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 2</h4>
-              <p>Card</p>
-              <a href="assets/img/slides/4.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="assets/img/slides/19.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
-              <a href="assets/img/slides/5.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/slides/6.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 3</h4>
-              <p>App</p>
-              <a href="assets/img/slides/6.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <img src="assets/img/slides/7.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 1</h4>
-              <p>Card</p>
-              <a href="assets/img/slides/7.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <img src="assets/img/slides/8.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 3</h4>
-              <p>Card</p>
-              <a href="assets/img/slides/18.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="assets/img/slides/19.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <a href="assets/img/slides/19.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-            </div>
-          </div>
-
+          <?php }  ?>
         </div>
 
       </div>
@@ -335,75 +254,31 @@
         </div>
 
         <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/avatar.webp" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Lorem ipsum dolor</h4>
-                <span>Lorem</span>
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
+          <?php foreach ($team as $key => $one) {?>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="member d-flex align-items-start">
+                <div class="pic"><img src="<?=$url.'/'.$one['image']?>" class="img-fluid" alt=""></div>
+                <div class="member-info">
+                  <h4><?=$one['fio']?></h4>
+                  <span><?=$one['position']?></span>
+                  <p><?=$one['about']?></p>
+                  <div class="social">
+                  <?php if (isset($one['twitter'])) :?>
+                    <a href="<?=$one['twitter']?>"><i class="ri-twitter-fill"></i></a>
+                  <?php elseif (isset($one['facebook'])) :?>
+                   <a href=""><i class="ri-facebook-fill"></i></a>
+                 <?php elseif (isset($one['instagram'])) :?>
+                    <a href=""><i class="ri-instagram-fill"></i></a>
+                 <?php elseif(isset($one['linkedin'])):?>
+                  <a href=""><i class="ri-linkedin-fill"></i></a>
+                  <?php else: ?>
                   <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                  <?php endif ?>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/avatar.webp" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Lorem ipsum dolor</h4>
-                <span>Lorem ipsum dolor</span>
-                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/avatar.webp" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Lorem ipsum dolor</h4>
-                <span>Lorem</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/avatar.webp" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Lorem ipsum dolor</h4>
-                <span>ipsum</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+            <?} ?>
         </div>
 
       </div>

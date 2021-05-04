@@ -1,6 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use backend\models\CollectionCategorySearch;
+use common\models\Collection;
+use common\models\CollectionCategory;
 use common\models\Cours;
 use common\models\CoursBlock;
 use common\models\CoursCategory;
@@ -16,6 +19,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Partner;
+use common\models\Team;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -83,7 +87,10 @@ class SiteController extends Controller
         $post = Post::find()->where(['status'=>1])->limit(6)->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $partner = Partner::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $impressions = Impressions::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
-        return $this->render('index',compact('post','partner','impressions'));
+        $collection_category = CollectionCategory::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $collection = Collection::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $team = Team::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        return $this->render('index',compact('post','partner','impressions','collection_category','collection','team'));
     }
     public function actionCenter()
     {

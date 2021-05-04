@@ -49,6 +49,14 @@ if ($model->file != '') {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group required-field">
+                                        <?= $form->field($model, "name[$lang->lang_code]")
+                                            ->textInput(['value'=>(!$model->isNewRecord)?$getValue['name']:''])
+                                            ->label('Name '.$lang->name)
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group required-field">
                                         <?= $form->field($model, "author[$lang->lang_code]")
                                             ->textInput(['value'=>(!$model->isNewRecord)?$getValue['author']:''])
                                             ->label('Author '.$lang->name)

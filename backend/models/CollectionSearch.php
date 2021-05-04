@@ -18,7 +18,7 @@ class CollectionSearch extends Collection
     {
         return [
             [['id', 'collection_category_id', 'content_id', 'status'], 'integer'],
-            [['language', 'author', 'technique', 'materials', 'size', 'created_at', 'updated_at'], 'safe'],
+            [['language', 'author', 'technique', 'materials', 'name', 'size', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -68,6 +68,7 @@ class CollectionSearch extends Collection
 
         $query->andFilterWhere(['like', 'language', $this->language])
             ->andFilterWhere(['like', 'author', $this->author])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'technique', $this->technique])
             ->andFilterWhere(['like', 'materials', $this->materials])
             ->andFilterWhere(['like', 'size', $this->size]);

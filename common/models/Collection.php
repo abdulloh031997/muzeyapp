@@ -57,7 +57,7 @@ class Collection extends \yii\db\ActiveRecord
         return [
             [['collection_category_id', 'content_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['language', 'author', 'technique', 'materials','image', 'size'], 'string', 'max' => 255],
+            [['language', 'author', 'technique', 'materials','image', 'size','name'], 'string', 'max' => 255],
             [['collection_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => CollectionCategory::className(), 'targetAttribute' => ['collection_category_id' => 'id']],
             ['file', 'image', 'skipOnEmpty' => $this->image ? false: true, 'extensions' => 'png, jpeg, jpg, gif', 'maxSize' => 1024*1024*10], // 10 mb
         ];
@@ -73,6 +73,7 @@ class Collection extends \yii\db\ActiveRecord
             'collection_category_id' => 'Collection Category ID',
             'language' => 'Language',
             'content_id' => 'Content ID',
+            'name' => 'Name',
             'author' => 'Author',
             'technique' => 'Technique',
             'materials' => 'Materials',
@@ -89,12 +90,14 @@ class Collection extends \yii\db\ActiveRecord
     public static function getValue($id,$lang_code)
     {
         $getValue = self::findOne(['content_id' => $id, 'language' => $lang_code]);
+        $name = (!empty($getValue->name)) ? $getValue->name : '';
         $author = (!empty($getValue->author)) ? $getValue->author : '';
         $technique = (!empty($getValue->technique)) ? $getValue->technique : '';
         $materials = (!empty($getValue->materials)) ? $getValue->materials : '';
         $collection_category_id = (!empty($getValue->collection_category_id)) ? $getValue->collection_category_id : '';
         $size = (!empty($getValue->size)) ? $getValue->size : '';
         return [
+            'name' => $name,
             'author' => $author,
             'technique' => $technique,
             'materials' => $materials,
