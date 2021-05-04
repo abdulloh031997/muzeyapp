@@ -92,9 +92,10 @@ class SiteController extends Controller
         $team = Team::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         return $this->render('index',compact('post','partner','impressions','collection_category','collection','team'));
     }
-    public function actionCenter()
+    public function actionInner($id)
     {
-        return $this->render('center');
+        $post_inner = Post::find()->where(['status'=>1,'id'=>$id])->asArray()->one();
+        return $this->render('inner',compact('post_inner'));
     }
     public function actionOrganizational()
     {
@@ -106,12 +107,21 @@ class SiteController extends Controller
     }
     public function actionNews()
     {
-        return $this->render('news');
+        $query =  Post::find()->where(['status'=>1]);
+
+        $count = $query->count();
+
+        $pagination = new  \yii\data\Pagination(['totalCount' => $count,'pageSize'=>9]);
+
+        $news = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->asArray()->orderBy(['id'=>SORT_DESC])->all();
+        return $this->render('news',compact('news','pagination'));
     }
-    public function actionInnerNews()
+    public function actionCNews($id)
     {
-        
-        return $this->render('inner-news');
+        $post = Post::find()->where(['category_id'=>$id])->asArray()->all();
+        return $this->render('inner-news',compact('post'));
     }
  
 

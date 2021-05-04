@@ -1,4 +1,94 @@
-  <!-- ======= Icon Boxes Section ======= -->
+  
+    <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Muzeyart</span></h2>
+          <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
+          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h2>
+          <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
+          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h2>
+          <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
+          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+  <!-- <div class="container-fluid mt-0" >
+    <div class="row">
+      <div class="col-md-12">
+        <div class="owl-carousel owl-theme" id="banner_car">
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/slides/10.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/slides/10.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/slides/10.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+          <div class="item border text-center text-warning">
+              <img src="./assets/img/ayvan.jpg" width="100%" height="170px" style="object-fit: cover;" alt="">
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>  -->
+<main id="main"><!-- ======= Icon Boxes Section ======= -->
   <section id="icon-boxes" class="icon-boxes">
       <div class="container">
         <div class="row">
@@ -29,7 +119,11 @@
 
         <div class="row content">
 
-        <?php foreach ($post as $key => $one):?>
+        <?php
+
+use yii\helpers\Url;
+
+foreach ($post as $key => $one):?>
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="fade-up">
             <article class="entry">
 
@@ -38,17 +132,17 @@
               </div>
 
               <h2 class="entry-title">
-                <a href="blog-single.html" ><?=$one['title']?></a>
+                <a href="<?=Url::to(['site/inner','id'=>$one['id']])?>" ><?=$one['title']?></a>
               </h2>
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-start"><i class="icofont-ui-calendar"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                  <li class="d-flex align-items-start"><i class="icofont-ui-calendar"></i> <a href="<?=Url::to(['site/inner','id'=>$one['id']])?>"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
                 </ul>
               </div>
               <div class="entry-content">
                 <div class="read-more">
-                  <a href="blog-single.html"><i class="icofont-arrow-right"></i></a>
+                  <a href="<?=Url::to(['site/inner','id'=>$one['id']])?>"><i class="icofont-arrow-right"></i></a>
                 </div>
               </div>
 
@@ -58,7 +152,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <a href="" class="float-right text-dark" style="font-weight: bold;">
+            <a href="<?=Url::to(['site/news'])?>" class="float-right text-dark" style="font-weight: bold;">
               Барча сўнгги янгиликлар    
             </a>
           </div>
@@ -353,3 +447,4 @@
 
       </div>
     </section><!-- End Contact Section -->
+    </main>

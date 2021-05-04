@@ -85,12 +85,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => '/site/index/',
-                '/kurslar' => '/site/kurslar/',
-                'registered/<id:\d+>' => 'registered/view',
-                'kurslar/<id:\d+>' => 'site/inner',
-                '/reg/<type:\d+>' => 'registered/create',
-                'registered/captcha/<refresh:\d+>' => '/registered/captcha',
-                'registered/captcha/<v:\w+>' => '/registered/captcha',
+                'post/<id:\d+>' => 'site/inner',
             ],
         ],
     ],

@@ -27,7 +27,7 @@
 ?>
 
 <!-- ======= Top Bar ======= -->
-<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
+<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top bg-dark  ">
     <div class="container d-flex align-items-center">
       <div class="contact-info mr-auto">
         <ul>
@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+ 
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
@@ -51,7 +52,7 @@
         <a href="#header" class="scrollto">Anyar</a>
       </h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="#header" class="logo mr-auto scrollto"><img src="assets/img/111.png" alt="" class="img-fluid"></a>
+      <a href="/" class="logo mr-auto scrollto"><img src="/assets/img/111.png" alt="" class="img-fluid"></a>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>

@@ -1,18 +1,33 @@
-<?php
-define('DS', DIRECTORY_SEPARATOR);
-require dirname(__FILE__) . DS . 'core' . DS . 'Prayer_Times.php';
-$settings               = new Settings('US');
-// $settings->location     = array('Detroit', 'Michigan', 'US');
-$settings->latitude     = 41.3171;
-$settings->longitude    = 69.2494;
-$settings->timezone     = 'Asia/Tashkent';
-$settings->method = 4; // See below for complete list of methods
-$settings->juristic = 1; // (0 - Shafi/Hanbli/Maliki, 1 - Hanafi)
-$prayer = new Prayer_Times($settings);
-$times = $prayer->getPrayerTimes(time());
-echo '<span class="px-1 text-light">Fajir-'  . date($times[0]).'</span>';
-echo '<span class="px-1 text-light">Duha-'       . date($times[1]).'</span>';
-echo '<span class="px-1 text-light">Dhur-'       . date($times[2]).'</span>';
-echo '<span class="px-1 text-light">Asr-'        . date($times[3]).'</span>';
-echo '<span class="px-1 text-light">Maghrib-'    . date($times[4]).'</span>';
-echo '<span class="px-1 text-light">Isha-'       . date($times[5]).'</span>';
+
+<div class="col-lg-4">
+        <div class="sidebar">
+        <h3 class="sidebar-title">Qidirish</h3>
+        <div class="sidebar-item search-form">
+            <form action="">
+            <input type="text">
+            <button type="submit"><i class="icofont-search"></i></button>
+            </form>
+        </div><!-- End sidebar search formn-->
+        <h3 class="sidebar-title">Kategoryalar</h3>
+        <div class="sidebar-item categories">
+            <ul>
+                <?php
+                use yii\helpers\Url;
+                foreach ($category as $index => $one):?>
+                <li><a href="<?=Url::to(['site/inner-news','id'=>$one['id']])?>"><?=$one['name']?></a></li>
+                <?php endforeach ?>
+            </ul>
+        </div><!-- End sidebar categories-->
+        <h3 class="sidebar-title">So'ngi Yangiliklar</h3>
+        <div class="sidebar-item recent-posts">
+        <?php  foreach ($post as $index => $one):?>
+            <div class="post-item clearfix">
+                <img src="<?=$url.'/'.$one['image']?>" alt="">
+                <h4><a href="<?=Url::to(['site/inner','id'=>$one['id']])?>"><?=$one['title']?></a></h4>
+                <time datetime="2020-01-01">Jan 1, 2020</time>
+            </div>
+            <?php endforeach ?>
+        </div><!-- End sidebar recent posts-->
+        </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
