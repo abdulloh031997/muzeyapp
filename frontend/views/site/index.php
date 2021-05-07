@@ -341,15 +341,13 @@ foreach ($post as $key => $one):?>
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>КОМАНДА</h2>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni harum cum ut ipsa facilis dolorum necessitatibus praesentium ea molestiae sit. Dolorum explicabo sit quam distinctio eveniet, quae doloribus quia nisi.</p>
         </div>
-
         <div class="row">
           <?php foreach ($team as $key => $one) {?>
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
               <div class="member d-flex align-items-start">
                 <div class="pic"><img src="<?=$url.'/'.$one['image']?>" class="img-fluid" alt=""></div>
                 <div class="member-info">
@@ -357,17 +355,8 @@ foreach ($post as $key => $one):?>
                   <span><?=$one['position']?></span>
                   <p><?=$one['about']?></p>
                   <div class="social">
-                  <?php if (isset($one['twitter'])) :?>
-                    <a href="<?=$one['twitter']?>"><i class="ri-twitter-fill"></i></a>
-                  <?php elseif (isset($one['facebook'])) :?>
                    <a href=""><i class="ri-facebook-fill"></i></a>
-                 <?php elseif (isset($one['instagram'])) :?>
                     <a href=""><i class="ri-instagram-fill"></i></a>
-                 <?php elseif(isset($one['linkedin'])):?>
-                  <a href=""><i class="ri-linkedin-fill"></i></a>
-                  <?php else: ?>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  <?php endif ?>
                   </div>
                 </div>
               </div>

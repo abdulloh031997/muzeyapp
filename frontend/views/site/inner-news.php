@@ -15,6 +15,7 @@ $url = Yii::getAlias("@fronted_domain");
         <div class="section-title">
           <h2>Янгиликлар</h2>
         </div>
+        
         <div class="row">
         <?php foreach ($post as $index => $one):?>
           <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">

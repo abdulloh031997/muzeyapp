@@ -41,7 +41,7 @@ if ($model->file != '') {
                     <!-- Tab item -->
                     <?php foreach ($languages as $index => $lang): ?>
                     <?php if (!$model->isNewRecord) {
-                        $getValue = \common\models\Post::getValue($_GET['id'], $lang->lang_code);
+                        $getValue = \common\models\Team::getValue($_GET['id'], $lang->lang_code);
                     }?>
 
                         <div class="tab-pane <?=$index== 0 ? 'active' : '' ?>" id="general<?=$lang->lang_code?>" role="tabpanel">

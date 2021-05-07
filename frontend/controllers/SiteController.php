@@ -118,7 +118,7 @@ class SiteController extends Controller
             ->asArray()->orderBy(['id'=>SORT_DESC])->all();
         return $this->render('news',compact('news','pagination'));
     }
-    public function actionCNews($id)
+    public function actionInnerNews($id)
     {
         $post = Post::find()->where(['category_id'=>$id])->asArray()->all();
         return $this->render('inner-news',compact('post'));
