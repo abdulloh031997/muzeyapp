@@ -3,7 +3,9 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
+use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
 /* @var $form yii\widgets\ActiveForm */
@@ -64,9 +66,7 @@ if ($model->file != '') {
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group required-field">
-                                        <?= $form->field($model, "body[$lang->lang_code]")
-                                            ->textarea(['value'=>(!$model->isNewRecord)?$getValue['body']:'','rows' => 6])
-                                            ->label('Body '.$lang->name)
+                                        <?= $form->field($model, "body[$lang->lang_code]")->textarea(['value'=>(!$model->isNewRecord)?$getValue['body']:'','id' => 'tiny-editor-description', 'data-tinymce' => "compact", 'data-height' => "300"])->label('Body'.$lang->name)
                                         ?>
                                     </div>
                                 </div>

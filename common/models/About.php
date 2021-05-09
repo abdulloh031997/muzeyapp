@@ -50,7 +50,7 @@ class About extends \yii\db\ActiveRecord
         return [
             [['content_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['language', 'name', 'image'], 'string', 'max' => 255],
+            [['language', 'name', 'image'], 'string'],
             ['file', 'image', 'skipOnEmpty' => $this->image ? false: true, 'extensions' => 'png, jpeg, jpg, gif', 'maxSize' => 1024*1024*10], // 10 mb
         ];
     }

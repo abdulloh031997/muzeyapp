@@ -24,6 +24,7 @@ return[
     'collection'=>'Kalleksiyalar',
     'logo'=>'Logo',
     'about'=>'Biz haqimizda',
+    'page'=>'Sahifalar',
     
     
 ];

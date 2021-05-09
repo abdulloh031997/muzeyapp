@@ -7,7 +7,7 @@
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Muzeyart</span></h2>
           <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
-          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
+          <a href="<?=\yii\helpers\Url::to(['site/about'])?>" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
         </div>
       </div>
 
@@ -16,7 +16,7 @@
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h2>
           <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
-          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
+          <a href="<?=\yii\helpers\Url::to(['site/about'])?>" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
         </div>
       </div>
 
@@ -25,7 +25,7 @@
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h2>
           <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
-          <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
+          <a href="<?=\yii\helpers\Url::to(['site/about'])?>" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
         </div>
       </div>
 
@@ -96,10 +96,15 @@
             <div class="icon-box">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="section-title">
+                  <div class="section-title w-100">
                     <h2>Биз ҳақимизда</h2>
-                    <p>История музея начинается с 1927 г., когда в Ташкенте была организована «Выставка лучших произведений народных мастеров Узбекистана». Впоследствии она стала постоянной, получив название «Выставка народного хозяйства Узбекистана». На этой основе 7 июля
-1937 г. открыли «Музей кустарных ремесел». Его первым директором был художник В.Развадовский. В разное время он пополнял фонды музеев восточных культур, этнографии, Оружейной палаты и других музеев Москвы и Санкт-Петербурга.</p>
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adip
+                    Lorem ipsum dolor sit amet, consectetur adip
+                    Lorem ipsum dolor sit amet, consectetur adip
+                    Lorem ipsum dolor sit amet, consectetur adip
+                    Lorem ipsum dolor sit amet, consectetur adip
+                    </p>
                   </div>
                 </div>
               </div>
@@ -188,7 +193,7 @@ foreach ($post as $key => $one):?>
         </div>
         <div class="owl-carousel kor-carousel">
             <?php foreach ($impressions as $key => $one):?>
-                <div class="border">
+                <div class="border" style="height:410px">
                 <div class="position-relative w-100" style="height: 250px;background-image: url('<?=$url.'/'.$one['image']?>'); background-size: cover; background-position: center;">
                     <div class="position-absolute bg-dark" style="opacity: .3; top: 0; left:0; right: 0; bottom: 0;"></div>
                     <div class="position-absolute text-white d-flex flex-column justify-content-center align-items-center rounded-circle" style="top:10px; right:10px; width: 70px; height: 70px; background-color: rgb(5, 87, 158);">
@@ -213,7 +218,7 @@ foreach ($post as $key => $one):?>
                         <polygon points="142.994,142.995 83.148,142.995 83.148,157.995 157.994,157.995 157.994,43.883 142.994,43.883 		"/>
                     </g>
                     </svg>
-                    <small class="mt-1" style="color: rgb(5, 87, 158);">6 min ago</small>
+                    <small class="mt-1" style="color: rgb(5, 87, 158);"><?=$one['date']?></small>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -329,7 +334,7 @@ foreach ($post as $key => $one):?>
             <div class="portfolio-info">
               <h4><?=$one['name']?></h4>
               <a href="<?=$url.'/'.$one['image']?>" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class='bx bx-zoom-in'></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-show"></i></a>
+              <a href="<?=Url::to(['site/collection','id'=>$one['id']], $schema = true)?>" class="details-link" title="More Details"><i class="bx bx-show"></i></a>
             </div>
           </div>
           <?php }  ?>

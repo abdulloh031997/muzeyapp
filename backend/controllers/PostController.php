@@ -15,6 +15,41 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
+    public function registerJs($file)
+    {
+        if ($file) {
+            $bundle = \backend\assets\AppAsset::register(\Yii::$app->view);
+
+            if (is_array($file)) {
+                foreach ($file as $fi) {
+                    $bundle->js[] = $fi;
+                }
+            } else {
+                $bundle->js[] = $file;
+            }
+        }
+    }
+
+    /**
+     * Register CSS file or files
+     *
+     * @param [type] $file
+     * @return void
+     */
+    public function registerCss($file)
+    {
+        if ($file) {
+            $bundle = \backend\assets\AppAsset::register(\Yii::$app->view);
+
+            if (is_array($file)) {
+                foreach ($file as $fi) {
+                    $bundle->css[] = $fi;
+                }
+            } else {
+                $bundle->css[] = $file;
+            }
+        }
+    }
     /**
      * {@inheritdoc}
      */
@@ -87,6 +122,10 @@ class PostController extends Controller
             } 
                 return $this->redirect(['index']);
         }
+        $this->registerJs(array(
+            'dist/libs/tinymce/tinymce.min.js',
+            'theme/components/tinymce-editor.js',
+        ));
         
 
         return $this->render('create', [
@@ -121,10 +160,14 @@ class PostController extends Controller
                 $model2->file = $model->image;
                 $model2->save();
             }
+            
 
             return $this->redirect(['index']);
         }
-
+        $this->registerJs(array(
+            'dist/libs/tinymce/tinymce.min.js',
+            'theme/components/tinymce-editor.js',
+        ));
         return $this->render('update', [
             'model' => $model,
         ]);

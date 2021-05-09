@@ -4,28 +4,16 @@
 
 use yii\helpers\Html;
 ?>
-  <!-- Header -->
-  <header id="header" class="ex-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Kurslar</h1>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </header> <!-- end of ex-header -->
+<section>
+    <div class="p-5 bg-dark"></div>
+    <div class="p-3 bg-dark">
+      <h5 class="text-white text-center p-4"><a href="" class="text-warning"><b>Бош саҳифа</b></a> | О нас</h5>
+    </div>
+</section>
     <!-- end of header -->
 <div class="site-about container">
-<div class="shadow card p-3">
-Давлат тест маркази ҳузуридаги Илмий-ўқув амалий маркази шартнома асосида қуйидаги йўналишлар бўйича давлат ва нодавлат ташкилотлари педагог ходимларини қисқа муддатли ўқув курсларига таклиф қилади: <br>
-1.	“Билимларни баҳолаш тестларини ишлаб чиқиш назарияси ва амалиёти” мавзусида 36 соатлик курс <br>
-2.	“Миллий сертификат бўйича тест топшириқларни шакллантириш” (тиллар кесимида) мавзусида 36 соатлик курс <br>
-Бундан ташқари барча хорижий тилни ўрганишни хоҳловчилар учун инглиз ва корейс тиллари бўйича ўқув курсларни йўлга қуйди<div class="br"></div>
-3.	“Корейс тили” бўйича 72 соатга мўлжалланган 3 ойлик курслар <br>
-4.	“Инглиз тили” бўйича 72 соатга мўлжалланган 3 ойлик курслар <br>
-<br>
-<br>
-Ушбу курслар қатнашиш истагини билдирганлар ilmiy.dtm.uz сайтидан рўйхатдан ўтишлари мумкин. 
-</div>
+  <div class="shadow card p-3">
+       <?=$about->name?>
+  </div>
 
 </div>

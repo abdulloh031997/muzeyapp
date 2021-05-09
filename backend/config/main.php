@@ -81,6 +81,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
+      
         'i18n' => [
             'translations' => [
                 'template*' => [

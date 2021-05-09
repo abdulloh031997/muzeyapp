@@ -50,7 +50,7 @@ if ($model->file != '') {
                                         <div class="col-md-12">
                                             <div class="form-group required-field">
                                                 <?= $form->field($model, "name[$lang->lang_code]")
-                                                    ->textInput(['value'=>(!$model->isNewRecord)?$getValue['name']:''])
+                                                    ->textInput(['value'=>(!$model->isNewRecord)?$getValue['name']:'','id' => 'tiny-editor-description', 'data-tinymce' => "compact", 'data-height' => "500"])
                                                     ->label('Name '.$lang->name)
                                                 ?>
                                             </div>

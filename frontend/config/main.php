@@ -13,6 +13,9 @@ return [
     'language' => 'ru',
     'TimeZone' => 'Asia/Tashkent',
     'controllerNamespace' => 'frontend\controllers',
+    'on beforeAction' => function ($event) {
+        \Yii::$app->language = \Yii::$app->getRequest()->getCookies()->getValue('language', 'ru');
+    },
     'components' => [
         'MyApplication' => [
             'class' => 'frontend\components\MyApplication'

@@ -46,6 +46,12 @@ AppAsset::register($this);
         <?= $content ?>
     <?= \frontend\widgets\FooterWidget::widget() ?>
     <?php $this->endBody() ?>
+    <script>
+        window.replainSettings = { id: '846dba3d-cfbe-4a03-9ca1-880c2979ad46' };
+        (function(u){var s=document.createElement('script');s.type='text/javascript';s.async=true;s.src=u;
+        var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
+        })('https://widget.replain.cc/dist/client.js');
+    </script>
 </body>
 </html>
 <?php $this->endPage() ?>
