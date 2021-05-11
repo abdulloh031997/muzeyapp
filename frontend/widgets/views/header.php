@@ -7,6 +7,10 @@ use yii\helpers\Url;
     use common\models\Menu;
     $url = Yii::getAlias("@fronted_domain");
     $language = Language::find()->where(['status' =>1])->asArray()->all();
+    // echo "<pre>";
+    // print_r($language);
+    // exit();
+    // echo "</pre>";
     function getRun($id){
         $out = '';
         $name = Menu::find()->where(['status'=>1])->andWhere(['id'=>$id])->one();
@@ -51,13 +55,9 @@ use yii\helpers\Url;
       </div>||
       <div id="languageModal" class="rdModal rdSmall">
         <?php foreach ($language as $index => $lang) :?>
-          <a href="<?= \yii\helpers\Url::to(['site/change', 'lang' =>'ru']) ?>">
-              <div class="rdItem">
-                  <div class="rdTextBox">
+          <a href="<?= \yii\helpers\Url::to(['site/change', 'lang' =>$lang['lang_code']]) ?>">
                       <span class="ml-2 text-white"><?=$lang['name']?></span>
-                  </div>
-              </div>
-          </a>
+            </a>
           <?php endforeach; ?>
       </div>
     </div>

@@ -139,7 +139,7 @@ class SiteController extends Controller
     }
     public function actionNews()
     {
-        $query =  Post::find()->where(['status'=>1]);
+        $query =  Post::find()->where(['status'=>1,'category_id'=>1]);
 
         $count = $query->count();
 
@@ -149,6 +149,19 @@ class SiteController extends Controller
             ->limit($pagination->limit)
             ->asArray()->orderBy(['id'=>SORT_DESC])->all();
         return $this->render('news',compact('news','pagination'));
+    }
+    public function actionArticle()
+    {
+        $query =  Post::find()->where(['status'=>1,'category_id'=>2]);
+
+        $count = $query->count();
+
+        $pagination = new  \yii\data\Pagination(['totalCount' => $count,'pageSize'=>9]);
+
+        $news = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->asArray()->orderBy(['id'=>SORT_DESC])->all();
+        return $this->render('article',compact('news','pagination'));
     }
     public function actionInnerNews($id)
     {
@@ -169,6 +182,11 @@ class SiteController extends Controller
     {
         $collection = Collection::find()->where(['collection_category_id'=>$id])->all();
         return $this->render('collection-all',compact('collection'));
+    }
+    public function actionExhibition()
+    {
+        $impressions = Impressions::find()->all();
+        return $this->render('exhibition',compact('impressions'));
     }
  
 

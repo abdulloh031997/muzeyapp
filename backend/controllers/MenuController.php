@@ -76,7 +76,6 @@ class MenuController extends Controller
 
             foreach ($langs as $index => $lang) {
                 $model2 = new Menu();
-
                 $model2->language = $lang->lang_code;
                 $model2->name = $model->name[$lang->lang_code];
                 $model2->c_order = $model->c_order;
@@ -119,7 +118,7 @@ class MenuController extends Controller
                 $model2->name = $model->name[$lang->lang_code];
                 $model2->c_order = $model->c_order;
                 $model2->link = $model->link;
-                $model2->save(false);
+                $model2->save();
             }
 
             return $this->redirect(['index']);
