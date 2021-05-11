@@ -50,14 +50,14 @@ use yii\helpers\Url;
         </ul>
       </div>
       <div class="cta">
-        <a href="#about" onclick="alert('Qilinish jarayonida !')" class="scrollto">Купить билет</a>
+        <a href="<?=Url::to(['registred/create'])?>"  class="scrollto">Купить билет</a>
         <a href="https://roundme.com/tour/568815/view/1845032" target="_blank" class="bg-dark">Вертуал</a>
       </div>||
       <div id="languageModal" class="rdModal rdSmall">
         <?php foreach ($language as $index => $lang) :?>
           <a href="<?= \yii\helpers\Url::to(['site/change', 'lang' =>$lang['lang_code']]) ?>">
-                      <span class="ml-2 text-white"><?=$lang['name']?></span>
-            </a>
+            <span class="ml-2 text-white"><?=$lang['name']?></span>
+          </a>
           <?php endforeach; ?>
       </div>
     </div>

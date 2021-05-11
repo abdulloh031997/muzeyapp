@@ -92,25 +92,23 @@ class RegisteredController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    // public function actionCreate($type)
-    // {
-    //     $model = Registered::findOne(['user_id' => Yii::$app->user->identity->id, 'type' => $type]);
-    //     if (!empty($model))
-    //         return $this->redirect('/registered/'.$model->id);
-    //     $model = new Registered();
+    public function actionCreate($type)
+    {
+       
+        $model = new Registered();
 
-    //     if ($model->load(Yii::$app->request->post())) {
-    //         $model->type = $type;
-    //         $model->user_id = Yii::$app->user->identity->id;
-    //         if ( $model->save()) {
-    //             return $this->redirect(['view', 'id' => $model->id]);
-    //         }
-    //     }
+        if ($model->load(Yii::$app->request->post())) {
+            $model->type = $type;
+            $model->user_id = Yii::$app->user->identity->id;
+            if ( $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
 
-    //     return $this->render('create', [
-    //         'model' => $model,
-    //     ]);
-    // }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
 
     /**
      * Updates an existing Registered model.
