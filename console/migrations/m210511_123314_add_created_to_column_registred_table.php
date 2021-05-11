@@ -12,8 +12,8 @@ class m210511_123314_add_created_to_column_registred_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('created_at','registred', $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'));
-        $this->addColumn('updated_at','registred', $this->timestamp()->null());
+        $this->addColumn('registred','created_at', $this->timestamp()->null()->defaultExpression('CURRENT_TIMESTAMP'));
+        $this->addColumn('registred','updated_at', $this->timestamp()->null());
     }
 
     /**

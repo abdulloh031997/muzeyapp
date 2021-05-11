@@ -6,16 +6,23 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Registred */
 
-$this->title = $model->name;
+$this->title = $model->name.' '.$model->fname;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Registreds'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="registred-view">
+<section>
+    <div class="p-5 bg-dark"></div>
+    <div class="p-3 bg-dark">
+      <h5 class="text-white text-center p-4"><a href="" class="text-warning"><b>Бош саҳифа</b></a> | Онлайн буюртма</h5>
+    </div>
+</section>
+<div class="registred-view container">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div style="display: flex; justify-content: space-between;">
+        <h3><?= Html::encode($this->title) ?></h3>
 
-    <p>
+        <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -24,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+        </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,

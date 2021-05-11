@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('app', 'Юбориш'), ['class' => 'btn btn-primary btn-sm']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Юбориш'), ['class' => 'btn btn-warning btn-sm']) ?>
                 </div>
             </div>
         </div>
