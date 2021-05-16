@@ -25,6 +25,7 @@ return[
     'logo'=>'Logo',
     'about'=>'Biz haqimizda',
     'page'=>'Sahifalar',
+    'blet'=>'Blet',
     
     
 ];

@@ -21,6 +21,8 @@ class AppAsset extends AssetBundle
         'vendor/venobox/venobox.css',
         'vendor/aos/aos.css',
         'css/style.css',
+        'dist/css/bvi.min.css',
+        'dist/css/bvi-font.min.css',
     ];
     public $js = [
         // 'js/jquery.min.js',
@@ -33,6 +35,10 @@ class AppAsset extends AssetBundle
         'vendor/isotope-layout/isotope.pkgd.min.js',
         'vendor/aos/aos.js',
         'js/main.js',
+        'dist/js/responsivevoice.min.js',
+        'dist/js/js.cookie.js',
+        'dist/js/bvi-init.js',
+        'dist/js/bvi.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

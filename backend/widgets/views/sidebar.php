@@ -1,6 +1,9 @@
 <?php
-$app = Yii::$app;
 
+use common\models\Registred;
+
+$app = Yii::$app;
+$count = Registred::find()->count();
 use yii\helpers\Url; ?>
 
 <div class="vertical-menu">
@@ -12,6 +15,13 @@ use yii\helpers\Url; ?>
                     <a href="<?= Url::to(['/']); ?>" class="waves-effect">
                         <i class="ri-dashboard-line"></i>
                         <span><?=\Yii::t('template', 'bosh_sahifa');?></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= Url::to(['registred/index']); ?>" class="waves-effect">
+                        <i class="ri-dashboard-line"></i>
+                        <span><?=\Yii::t('template', 'blet');?></span>
+                        <span class="badge badge-pill badge-success float-right"><?=$count?></span>
                     </a>
                 </li>
                 <li>

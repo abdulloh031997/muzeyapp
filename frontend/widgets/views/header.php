@@ -47,6 +47,7 @@ use yii\helpers\Url;
           <li><i class="icofont-envelope"></i><a href="mailto:info@muzeyart.uz">info@muzeyart.uz</a></li>
           <li><i class="icofont-phone"></i> <a href="tel:+998712564042">(+998)71 256-40-42</a>  </li>
           <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Ҳар куни 9.00-18.00</li>
+          <li><a href="#" class="bvi-open btn btn-light btn-sm" title="Версия сайта для слабовидящих"><i class="bx bx-show text-dark"></i></a></li>
         </ul>
       </div>
       <div class="cta">
