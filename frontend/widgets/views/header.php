@@ -90,7 +90,9 @@ use yii\helpers\Url;
   </header><!-- End Header -->
 <?php
 $script = <<< JS
-    // alert("okey");
+  //  $( ".bvi-open" ).click(function() {
+  //     $("#topbar").css("margin-top:","250px");
+  // });
 JS;
 $this->registerJs($script);
 ?>

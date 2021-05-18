@@ -69,7 +69,7 @@ class SettingController extends Controller
         if ($model->load($post = Yii::$app->request->post())) {
 
             $SiteContent = new SiteContent();
-            $SiteContent->type = 'page';
+            $SiteContent->type = 'SETTING';
             $SiteContent->created_by = Yii::$app->user->id;
             $SiteContent->save();
             $langs = active_langauges();

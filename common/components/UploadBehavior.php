@@ -58,7 +58,7 @@ class UploadBehavior extends Behavior {
         $this->name = $path . '/' . microtime(true) . '.' . $this->owner->{$this->imageFile}->extension;
         FileHelper::createDirectory(Yii::getAlias('@filepath')."/".$path);
 
-        $this->owner->{$this->imageFile}->saveAs(Yii::getAlias('@filepath')."/".$this->name);
+        $this->owner->{$this->imageFile}->saveAs(Yii::getAlias('@filepath')."/".$this->name,false);
 
         $this->owner->{$this->photo} = $this->name;
         

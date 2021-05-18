@@ -77,7 +77,9 @@ use yii\helpers\Url; ?>
                         <li><a href="<?= Url::to(['banner/index']); ?>"> <?=\Yii::t('template', 'banner');?></a></li>
                         <li><a href="<?= Url::to(['logo/index']); ?>"> <?=\Yii::t('template', 'logo');?></a></li>
                         <li><a href="<?= Url::to(['about/index']); ?>"> <?=\Yii::t('template', 'about');?></a></li>
+                        <li><a href="<?= Url::to(['slider/index']); ?>"> <?=\Yii::t('template', 'slider');?></a></li>
                         <li><a href="<?= Url::to(['page/index']); ?>"> <?=\Yii::t('template', 'page');?></a></li>
+                        <li><a href="<?= Url::to(['setting/index']); ?>"> <?=\Yii::t('template', 'settings');?></a></li>
                     </ul>
                 </li>
 

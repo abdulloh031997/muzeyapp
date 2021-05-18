@@ -13,7 +13,7 @@ $languages = active_langauges();
 $langs_array = ArrayHelper::map(\common\models\Language::find()->where(['status'=>1])->all(), 'lang_code', 'name');
 $category = ArrayHelper::map(\common\models\Category::find()->where(['status'=>1])->all(), 'id', 'name');
 if ($model->image == '') {
-    $path = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO1Y1OgPdmIoTzOTA1oYH2TuXAV9q2xD3mQw&usqp=CAU';
+    $path = '';
 } else {
     $path = '@fronted_domain/' . $model->image;
 }
@@ -66,7 +66,7 @@ if ($model->file != '') {
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group required-field">
-                                        <?= $form->field($model, "body[$lang->lang_code]")->textarea(['value'=>(!$model->isNewRecord)?$getValue['body']:'','id' => 'tiny-editor-description', 'data-tinymce' => "compact", 'data-height' => "300"])->label('Body'.$lang->name)
+                                        <?= $form->field($model, "body[$lang->lang_code]")->textarea(['value'=>(!$model->isNewRecord)?$getValue['body']:'','id' => "tiny-editor-$lang->lang_code", 'data-tinymce' => "compact", 'data-height' => "300"])->label('Body'.$lang->name)
                                         ?>
                                     </div>
                                 </div>

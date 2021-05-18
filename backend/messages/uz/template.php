@@ -26,6 +26,7 @@ return[
     'about'=>'Biz haqimizda',
     'page'=>'Sahifalar',
     'blet'=>'Blet',
+    'slider'=>'Slider',
     
     
 ];

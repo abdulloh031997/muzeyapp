@@ -20,6 +20,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Partner;
+use common\models\Slider;
 use common\models\Team;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -116,17 +117,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $post = Post::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->limit(6)->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $slider = Slider::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $partner = Partner::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $about = About::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->one();
-        $impressions = Impressions::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
-        $collection_category = CollectionCategory::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $impressions = Impressions::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $collection_category = CollectionCategory::find()->andWhere(['language' => current_lang()])->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $collection = Collection::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
-        $team = Team::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
-        return $this->render('index',compact('post','partner','impressions','collection_category','collection','team','about'));
+        $team = Team::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        return $this->render('index',compact('post','partner','impressions','collection_category','collection','team','about','slider'));
     }
     public function actionInner($id)
     {
-        $post_inner = Post::find()->where(['status'=>1,'id'=>$id])->asArray()->one();
+        $post_inner = Post::find()->where(['status'=>1,'id'=>$id])->andWhere(['language' => current_lang()])->asArray()->one();
         return $this->render('inner',compact('post_inner'));
     }
     public function actionOrganizational()
@@ -139,7 +141,7 @@ class SiteController extends Controller
     }
     public function actionNews()
     {
-        $query =  Post::find()->where(['status'=>1,'category_id'=>1]);
+        $query =  Post::find()->where(['status'=>1,'category_id'=>1])->andWhere(['language' => current_lang()]);
 
         $count = $query->count();
 
@@ -152,7 +154,7 @@ class SiteController extends Controller
     }
     public function actionArticle()
     {
-        $query =  Post::find()->where(['status'=>1,'category_id'=>2]);
+        $query =  Post::find()->where(['status'=>1,'category_id'=>2])->andWhere(['language' => current_lang()]);
 
         $count = $query->count();
 
@@ -165,27 +167,27 @@ class SiteController extends Controller
     }
     public function actionInnerNews($id)
     {
-        $post = Post::find()->where(['category_id'=>$id])->asArray()->all();
+        $post = Post::find()->where(['category_id'=>$id])->andWhere(['language' => current_lang()])->asArray()->all();
         return $this->render('inner-news',compact('post'));
     }
     public function actionCollection($id)
     {
-        $collection = Collection::find()->where(['id'=>$id])->one();
+        $collection = Collection::find()->where(['id'=>$id])->andWhere(['language' => current_lang()])->one();
         return $this->render('collection',compact('collection'));
     }
     public function actionCall()
     {
-        $collection = Collection::find()->all();
+        $collection = Collection::find()->andWhere(['language' => current_lang()])->all();
         return $this->render('call',compact('collection'));
     }
     public function actionCollectionAll($id)
     {
-        $collection = Collection::find()->where(['collection_category_id'=>$id])->all();
+        $collection = Collection::find()->where(['collection_category_id'=>$id])->andWhere(['language' => current_lang()])->all();
         return $this->render('collection-all',compact('collection'));
     }
     public function actionExhibition()
     {
-        $impressions = Impressions::find()->all();
+        $impressions = Impressions::find()->andWhere(['language' => current_lang()])->all();
         return $this->render('exhibition',compact('impressions'));
     }
  
@@ -255,7 +257,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        $about = About::find()->one();
+        $about = About::find()->where(['language' => current_lang()])->one();
         return $this->render('about',compact('about'));
     }
     public function actionProfile()

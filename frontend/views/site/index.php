@@ -3,31 +3,15 @@
     <div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
 
       <!-- Slide 1 -->
-      <div class="carousel-item active">
+      <?php $i=0; foreach ($slider as $index => $one): $i++; ?>
+      <div class="carousel-item <?=($i==1)?'active':'' ?>">
         <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Muzeyart</span></h2>
-          <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
+          <h2 class="animate__animated animate__fadeInDown"><?=$one['title']?></h2>
+          <p class="animate__animated animate__fadeInUp"> <?=$one['body']?></p>
           <a href="<?=\yii\helpers\Url::to(['site/about'])?>" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
         </div>
       </div>
-
-      <!-- Slide 2 -->
-      <div class="carousel-item">
-        <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h2>
-          <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
-          <a href="<?=\yii\helpers\Url::to(['site/about'])?>" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="carousel-item">
-        <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h2>
-          <p class="animate__animated animate__fadeInUp"> Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи. Ўзбекистон Республикаси Маданият  вазирлиги тизимидаги Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи мамлакатимизда ўзига хос  ягона музейлардан ҳисобланади.</p>
-          <a href="<?=\yii\helpers\Url::to(['site/about'])?>" class="btn-get-started animate__animated animate__fadeInUp scrollto">Batafsil</a>
-        </div>
-      </div>
+      <?php endforeach; ?>
 
       <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>

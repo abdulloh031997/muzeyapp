@@ -101,6 +101,7 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
+        
         if ($model->load($post = Yii::$app->request->post())) {
 
             $SiteContent = new SiteContent();
@@ -122,11 +123,11 @@ class PostController extends Controller
             } 
                 return $this->redirect(['index']);
         }
+      
         $this->registerJs(array(
             'dist/libs/tinymce/tinymce.min.js',
             'theme/components/tinymce-editor.js',
         ));
-        
 
         return $this->render('create', [
             'model' => $model,
@@ -152,16 +153,27 @@ class PostController extends Controller
                     'content_id'=>$model->content_id,
                     'language'=>$lang->lang_code
                 ]);
-                $model2->title = $model->title[$lang->lang_code];
-                $model2->description = $model->description[$lang->lang_code];
-                $model2->body = $model->body[$lang->lang_code];
-                $model2->status = $model->status;
-                $model2->category_id = $model->category_id;
-                $model2->file = $model->image;
-                $model2->save();
+                if(!empty($model2))
+                {
+                    $model2->title = $model->title[$lang->lang_code];
+                    $model2->description = $model->description[$lang->lang_code];
+                    $model2->body = $model->body[$lang->lang_code];
+                    $model2->status = $model->status;
+                    $model2->category_id = $model->category_id;
+                    $model2->file = $model->image;
+                    $model2->save();    
+                }else{
+                    $model2 = new Post();
+                    $model2->language = $lang->lang_code;
+                    $model2->title = $model->title[$lang->lang_code];
+                    $model2->description = $model->description[$lang->lang_code];
+                    $model2->body = $model->body[$lang->lang_code];
+                    $model2->status = $model->status;
+                    $model2->category_id = $model->category_id;
+                    $model2->save();
+                }
             }
             
-
             return $this->redirect(['index']);
         }
         $this->registerJs(array(

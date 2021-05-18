@@ -115,10 +115,25 @@ class MenuController extends Controller
                     'content_id'=>$model->content_id,
                     'language'=>$lang->lang_code
                 ]);
-                $model2->name = $model->name[$lang->lang_code];
-                $model2->c_order = $model->c_order;
-                $model2->link = $model->link;
-                $model2->save();
+                if(!empty($model2)){
+                    $model2->name = $model->name[$lang->lang_code];
+                    $model2->c_order = $model->c_order;
+                    $model2->link = $model->link;
+                    $model2->save();
+                }else{
+                    $model2 = new Menu();
+                    $model2->language = $lang->lang_code;
+                    $model2->name = $model->name[$lang->lang_code];
+                    $model2->c_order = $model->c_order;
+                    if (is_numeric($model->parent_id[$lang->lang_code])) {
+                        $model2->parent_id = $model->parent_id[$lang->lang_code];
+                    } else {
+                        $model2->parent_id = 0;
+                    }
+                    $model2->link = $model->link;
+                    $model2->save(false);
+                }
+
             }
 
             return $this->redirect(['index']);

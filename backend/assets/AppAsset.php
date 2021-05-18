@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'dist/css/icons.min.css',
         'theme/animate.min.css',
         'theme/components/media-browser/style.css',
+        
     ];
 
     public $js = [
@@ -42,6 +43,8 @@ class AppAsset extends AssetBundle
         'dist/js/numeral.min.js',
         'dist/js/pages/form-advanced.init.js',
         'theme/components/media-browser/init.js',
+
+        
     ];
 
     public $depends = [
