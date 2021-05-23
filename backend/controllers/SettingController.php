@@ -113,12 +113,29 @@ class SettingController extends Controller
                     'content_id'=>$model->content_id,
                     'language'=>$lang->lang_code
                 ]);
-                $model2->title = $model->title[$lang->lang_code];
-                $model2->value = $model->value[$lang->lang_code];
-                $model2->status = $model->status;
-                $model2->key= $model->key;
-                $model2->file = $model->image;
-                $model2->save();
+                if(!empty($model2))
+                {
+                    $model2->title = $model->title[$lang->lang_code];
+                    $model2->value = $model->value[$lang->lang_code];
+                    $model2->status = $model->status;
+                    $model2->key= $model->key;
+                    $model2->file = $model->image;
+                    $model2->save();
+                    
+                }
+                else{
+                    $model2 = new Setting();
+                    $model2->language = $lang->lang_code;
+                    $model2->title = $model->title[$lang->lang_code];
+                    $model2->value = $model->value[$lang->lang_code]; 
+                    $model2->status = $model->status;
+                    $model2->key = $model->key;
+                    $model2->file = $model->image;
+                    $model2->user_id = Yii::$app->user->identity->id;
+                    $model2->content_id = $model->id;
+                    $model2->save();
+                }
+
             }
 
             return $this->redirect(['index']);

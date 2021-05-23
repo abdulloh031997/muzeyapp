@@ -20,12 +20,14 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Partner;
+use common\models\Setting;
 use common\models\Slider;
 use common\models\Team;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use Settings;
 use yii\web\Cookie;
 
 /**
@@ -122,9 +124,19 @@ class SiteController extends Controller
         $about = About::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->one();
         $impressions = Impressions::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $collection_category = CollectionCategory::find()->andWhere(['language' => current_lang()])->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
-        $collection = Collection::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        $collection = Collection::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $team = Team::find()->where(['status'=>1])->andWhere(['language' => current_lang()])->orderBy(['id'=>SORT_DESC])->asArray()->all();
-        return $this->render('index',compact('post','partner','impressions','collection_category','collection','team','about','slider'));
+        $about_key = Setting::find()->where(['key'=>'about'])->andWhere(['language' => current_lang()])->one();
+        $news_key = Setting::find()->where(['key'=>'news'])->andWhere(['language' => current_lang()])->one();
+        $part_key = Setting::find()->where(['key'=>'part'])->andWhere(['language' => current_lang()])->one();
+        $vertual_key = Setting::find()->where(['key'=>'vertual'])->andWhere(['language' => current_lang()])->one();
+        $kor_key = Setting::find()->where(['key'=>'kor'])->andWhere(['language' => current_lang()])->one();
+        $team_key = Setting::find()->where(['key'=>'team'])->andWhere(['language' => current_lang()])->one();
+        $contact_key = Setting::find()->where(['key'=>'contact'])->andWhere(['language' => current_lang()])->one();
+        $address_key = Setting::find()->where(['key'=>'address'])->andWhere(['language' => current_lang()])->one();
+        $email_key = Setting::find()->where(['key'=>'email'])->andWhere(['language' => current_lang()])->one();
+        $phone_key = Setting::find()->where(['key'=>'phone'])->andWhere(['language' => current_lang()])->one();
+        return $this->render('index',compact('post','partner','impressions','collection_category','collection','team','about','slider','about_key','news_key','part_key','kor_key','vertual_key','team_key','contact_key','address_key','email_key','phone_key'));
     }
     public function actionInner($id)
     {
@@ -177,7 +189,7 @@ class SiteController extends Controller
     }
     public function actionCall()
     {
-        $collection = Collection::find()->andWhere(['language' => current_lang()])->all();
+        $collection = Collection::find()->andWhere(['language' => current_lang()])->asArray()->all();
         return $this->render('call',compact('collection'));
     }
     public function actionCollectionAll($id)

@@ -115,15 +115,32 @@ class CollectionController extends Controller
                     'content_id'=>$model->content_id,
                     'language'=>$lang->lang_code
                 ]);
-                $model2->name = $model->name[$lang->lang_code];
-                $model2->author = $model->author[$lang->lang_code];
-                $model2->collection_category_id = $model->collection_category_id;
-                $model2->status = $model->status;
-                $model2->file = $model->image;
-                $model2->technique = $model->technique[$lang->lang_code];
-                $model2->materials = $model->materials[$lang->lang_code];
-                $model2->size = $model->size[$lang->lang_code];
-                $model2->save();
+                if(!empty($model2)){
+                    $model2->name = $model->name[$lang->lang_code];
+                    $model2->author = $model->author[$lang->lang_code];
+                    $model2->collection_category_id = $model->collection_category_id;
+                    $model2->status = $model->status;
+                    $model2->file = $model->image;
+                    $model2->technique = $model->technique[$lang->lang_code];
+                    $model2->materials = $model->materials[$lang->lang_code];
+                    $model2->size = $model->size[$lang->lang_code];
+                    $model2->save();
+                }
+                else{
+                    $model2 = new Collection();
+                    $model2->language = $lang->lang_code;
+                    $model2->name = $model->name[$lang->lang_code];
+                    $model2->author = $model->author[$lang->lang_code];
+                    $model2->collection_category_id = $model->collection_category_id;
+                    $model2->status = $model->status;
+                    $model2->file = $model->image;
+                    $model2->technique = $model->technique[$lang->lang_code];
+                    $model2->materials = $model->materials[$lang->lang_code];
+                    $model2->size = $model->size[$lang->lang_code];
+                    $model2->content_id = $model->id;
+                    $model2->save();
+                }
+
             }
 
             return $this->redirect(['index']);

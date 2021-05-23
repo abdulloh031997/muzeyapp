@@ -21,7 +21,7 @@
                 <div class="container" data-aos="fade-up">
                     <div class="row portfolio-container">
                         <?php foreach ($collection as $key => $one) { ?>
-                            <div class="col-md-6 portfolio-item one<?=$one['id']?>">
+                            <div class="col-md-6 shadow border portfolio-item one<?=$one['id']?>">
                                 <img src="<?=$url.'/'.$one['image']?>" class="img-fluid" style="width:100%; height:250px; object-fit: cover;"" alt="">
                                 <div class="portfolio-info">
                                 <h4><?=$one['name']?></h4>

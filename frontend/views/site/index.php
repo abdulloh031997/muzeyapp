@@ -1,4 +1,7 @@
+  <?php
+    
   
+  ?>
     <section id="hero" class="d-flex justify-cntent-center align-items-center">
     <div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
 
@@ -81,13 +84,9 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="section-title w-100">
-                    <h2>Биз ҳақимизда</h2>
+                    <h2><?=(isset($about_key))?$about_key['title']:''?></h2>
                     <p>
-                    Lorem ipsum dolor sit amet, consectetur adip
-                    Lorem ipsum dolor sit amet, consectetur adip
-                    Lorem ipsum dolor sit amet, consectetur adip
-                    Lorem ipsum dolor sit amet, consectetur adip
-                    Lorem ipsum dolor sit amet, consectetur adip
+                    <?=(isset($about_key))?$about_key['value']:''?>
                     </p>
                   </div>
                 </div>
@@ -103,7 +102,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Янгиликлар</h2>
+          <h2><?=(isset($news_key))?$news_key['title']:''?></h2>
         </div>
 
         <div class="row content">
@@ -154,7 +153,7 @@ foreach ($post as $key => $one):?>
     <section id="clients" class="clients">
       <div class="container" data-aos="zoom-in">
         <div class="section-title">
-          <h2 class="text-center py-2">ҲАМКОРЛАР</h2>
+          <h2 class="text-center py-2"><?=(isset($part_key))?$part_key['title']:''?></h2>
         </div>
         <div class="owl-carousel clients-carousel">
             <?php foreach ($partner as $key => $one):?>
@@ -172,19 +171,60 @@ foreach ($post as $key => $one):?>
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Кўргазмалар</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2><?=(isset($kor_key))?$kor_key['title']:''?></h2>
+          <p><?=(isset($kor_key))?$kor_key['value']:''?></p>
         </div>
         <div class="owl-carousel kor-carousel">
-            <?php foreach ($impressions as $key => $one):?>
+            <?php foreach ($impressions as $key => $one): $date=['1' => 'января','2' => 'февраля','3' => 'марта','4' => 'апреля','5' => 'мая','6' => 'июня','7' => 'июля','8' => 'августа','9' => 'сентября','10' => 'октября','11' => 'ноября','12' => 'декабря',];?>
                 <div class="border" style="height:410px">
                 <div class="position-relative w-100" style="height: 250px;background-image: url('<?=$url.'/'.$one['image']?>'); background-size: cover; background-position: center;">
                     <div class="position-absolute bg-dark" style="opacity: .3; top: 0; left:0; right: 0; bottom: 0;"></div>
                     <div class="position-absolute text-white d-flex flex-column justify-content-center align-items-center rounded-circle" style="top:10px; right:10px; width: 70px; height: 70px; background-color: rgb(5, 87, 158);">
-                    <small>27</small>
-                    <small><b>MAR</b></small>
+                    <small><?PHP Yii::$app->formatter->locale = 'en-US'; echo Yii::$app->formatter->asDate($one['date'],'d')?></small>
                     </div>
-                    <a href="#" class="position-absolute px-3 py-2 text-white" style="bottom:10px; left: 10px; background-color: rgb(5, 87, 158);"><small>PHOTOS</small></a>
+                    <a href="#" class="position-absolute px-3 py-2 text-white" style="bottom:10px; left: 10px; background-color: rgb(5, 87, 158);">
+                      <small>
+                        <?php 
+                            $month = Yii::$app->formatter->asDate($one['date'],'M');
+                             if ($month == '1'){
+                               echo $date['1'];
+                             }
+                             elseif ($month == '2'){
+                              echo $date['2'];
+                             }
+                             elseif ($month == '3'){
+                              echo $date['3'];
+                             }
+                             elseif ($month == '4'){
+                              echo $date['4'];
+                             }
+                             elseif ($month == '5'){
+                              echo $date['5']; 
+                             }
+                             elseif ($month == '6'){
+                              echo $date['6'];
+                             }
+                             elseif ($month == '7'){
+                              echo $date['7'];
+                             }
+                             elseif ($month == '8'){
+                              echo $date['8'];
+                             }
+                             elseif ($month == '9'){
+                              echo $date['9'];
+                             }
+                             elseif ($month == '10'){
+                              echo $date['10'];
+                             }
+                             elseif ($month == '11'){
+                              echo $date['11'];
+                             }
+                             elseif ($month == '12'){
+                              echo $date['12'];
+                             }
+                        ?>
+                      </small>
+                    </a>
                 </div>
                 <div class="px-3 pt-4 pb-1">
                     <h3 class="entry-title">
@@ -207,69 +247,7 @@ foreach ($post as $key => $one):?>
             </div>
             <?php endforeach; ?>
         </div>
-        <!-- <div class="row">
-          <div class="col-md-6 p-4">
-            <div class="border">
-              <div class="position-relative w-100" style="height: 250px;background-image: url('./assets/images/slides/15.jpg'); background-size: cover; background-position: center;">
-                <div class="position-absolute bg-dark" style="opacity: .3; top: 0; left:0; right: 0; bottom: 0;"></div>
-                <div class="position-absolute text-white d-flex flex-column justify-content-center align-items-center rounded-circle" style="top:10px; right:10px; width: 70px; height: 70px; background-color: rgb(5, 87, 158);">
-                  <small>27</small>
-                  <small><b>MAR</b></small>
-                </div>
-                <a href="#" class="position-absolute px-3 py-2 text-white" style="bottom:10px; left: 10px; background-color: rgb(5, 87, 158);"><small>PHOTOS</small></a>
-              </div>
-              <div class="px-3 pt-4 pb-1">
-                <h3 class="entry-title">
-                  <a href="blog-single.html" style="font-family: sans-serif; color: #444444; font-size:24px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
-                </h3>
-              </div>
-              <div class="d-flex align-items-center mr-4 p-3">
-                <svg height="16px" class="mr-2" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                  viewBox="0 0 300.988 300.988" style="enable-background:new 0 0 300.988 300.988;" xml:space="preserve">
-                <g>
-                  <g>
-                    <path d="M150.494,0.001C67.511,0.001,0,67.512,0,150.495s67.511,150.493,150.494,150.493s150.494-67.511,150.494-150.493
-                      S233.476,0.001,150.494,0.001z M150.494,285.987C75.782,285.987,15,225.206,15,150.495S75.782,15.001,150.494,15.001
-                      s135.494,60.782,135.494,135.493S225.205,285.987,150.494,285.987z"/>
-                    <polygon points="142.994,142.995 83.148,142.995 83.148,157.995 157.994,157.995 157.994,43.883 142.994,43.883 		"/>
-                  </g>
-                </svg>
-                <small class="mt-1" style="color: rgb(5, 87, 158);">6 min ago</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 p-4">
-            <div class="border">
-              <div class="position-relative w-100" style="height: 250px;background-image: url('./assets/images/slides/15.jpg'); background-size: cover; background-position: center;">
-                <div class="position-absolute bg-dark" style="opacity: .3; top: 0; left:0; right: 0; bottom: 0;"></div>
-                <div class="position-absolute text-white d-flex flex-column justify-content-center align-items-center rounded-circle" style="top:10px; right:10px; width: 70px; height: 70px; background-color: rgb(5, 87, 158);">
-                  <small>27</small>
-                  <small><b>MAR</b></small>
-                </div>
-                <a href="#" class="position-absolute px-3 py-2 text-white" style="bottom:10px; left: 10px; background-color: rgb(5, 87, 158);"><small>PHOTOS</small></a>
-              </div>
-              <div class="px-3 pt-4 pb-1">
-                <h3 class="entry-title">
-                  <a href="blog-single.html" style="font-family: sans-serif; color: #444444; font-size:24px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
-                </h3>
-              </div>
-              <div class="d-flex align-items-center mr-4 p-3">
-                <svg height="16px" class="mr-2" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                  viewBox="0 0 300.988 300.988" style="enable-background:new 0 0 300.988 300.988;" xml:space="preserve">
-                <g>
-                  <g>
-                    <path d="M150.494,0.001C67.511,0.001,0,67.512,0,150.495s67.511,150.493,150.494,150.493s150.494-67.511,150.494-150.493
-                      S233.476,0.001,150.494,0.001z M150.494,285.987C75.782,285.987,15,225.206,15,150.495S75.782,15.001,150.494,15.001
-                      s135.494,60.782,135.494,135.493S225.205,285.987,150.494,285.987z"/>
-                    <polygon points="142.994,142.995 83.148,142.995 83.148,157.995 157.994,157.995 157.994,43.883 142.994,43.883 		"/>
-                  </g>
-                </svg>
-                <small class="mt-1" style="color: rgb(5, 87, 158);">6 min ago</small>
-              </div>
-            </div>
-          </div>
-     
-        </div> -->
+       
 
       </div>
     </section><!-- End Services Section -->
@@ -280,8 +258,8 @@ foreach ($post as $key => $one):?>
 
         <div class="row" data-aos="zoom-in">
           <div class="col-lg-9 text-center text-lg-left">
-            <h3>Ўзбекистон амалий санъат ва ҳунармандчилик тарихи музейи.</h3>
-            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, cumque possimus vel nobis in id ipsa nesciunt eligendi doloribus reiciendis eveniet quisquam laudantium necessitatibus illum aliquam nihil? Provident, qui laborum.</p>
+          <h3><?=(isset($vertual_key))?$vertual_key['title']:''?></h3>
+          <p><?=(isset($vertual_key))?$vertual_key['value']:''?></p>
           </div>
           <div class="col-lg-3 cta-btn-container text-center">
             <a class="cta-btn align-middle" href="#">VERTUAL</a>
@@ -296,8 +274,8 @@ foreach ($post as $key => $one):?>
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Коллекциялар</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quasi sunt, omnis nihil aliquid neque vel, enim autem minima hic adipisci. Reprehenderit modi consectetur enim. Perferendis harum dignissimos distinctio quam.</p>
+        <h3><?=(isset($kor_key))?$kor_key['title']:''?></h3>
+          <p><?=(isset($kor_key))?$kor_key['value']:''?></p>
         </div>
 
         <div class="row">
@@ -313,11 +291,11 @@ foreach ($post as $key => $one):?>
 
         <div class="row portfolio-container">
           <?php foreach ($collection as $key => $one) { ?>
-          <div class="col-lg-4 col-md-6 portfolio-item one<?=$one['id']?>">
-            <img src="<?=$url.'/'.$one['image']?>" class="img-fluid" alt="">
+          <div class="col-lg-4 col-md-6 shadow portfolio-item one<?=$one['id']?>">
+            <img src="<?=$url.'/'.$one['image']?>" class="img-fluid" style="width: 100%;height:450px" alt="">
             <div class="portfolio-info">
               <h4><?=$one['name']?></h4>
-              <a href="<?=$url.'/'.$one['image']?>" data-gall="portfolioGallery" class="venobox preview-link" title="App 1"><i class='bx bx-zoom-in'></i></a>
+              <a href="<?=$url.'/'.$one['image']?>" data-gall="portfolioGallery" class="venobox preview-link" title=""><i class='bx bx-zoom-in'></i></a>
               <a href="<?=Url::to(['site/collection','id'=>$one['id']], $schema = true)?>" class="details-link" title="More Details"><i class="bx bx-show"></i></a>
             </div>
           </div>
@@ -331,8 +309,8 @@ foreach ($post as $key => $one):?>
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>КОМАНДА</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni harum cum ut ipsa facilis dolorum necessitatibus praesentium ea molestiae sit. Dolorum explicabo sit quam distinctio eveniet, quae doloribus quia nisi.</p>
+        <h3><?=(isset($team_key))?$team_key['title']:''?></h3>
+          <p><?=(isset($team_key))?$team_key['value']:''?></p>
         </div>
         <div class="row">
           <?php foreach ($team as $key => $one) {?>
@@ -361,7 +339,7 @@ foreach ($post as $key => $one):?>
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>БИЗ БИЛАН БОҒЛАНИНГ</h2>
+          <h2><?=(isset($contact_key))?$contact_key['title']:''?></h2>
         </div>
 
         <div class="row mt-1 d-flex justify-content-end" data-aos="fade-right" data-aos-delay="100">
@@ -370,20 +348,20 @@ foreach ($post as $key => $one):?>
             <div class="info">
               <div class="address">
                 <i class="icofont-google-map"></i>
-                <h4>Manzil:</h4>
-                <p>Тошкент шаҳар, 100031, Ракатбоши-15. Мўлжал: Космоновтлар метро бекати.</p>
+                <h4><?=(isset($address_key))?$address_key['title']:''?></h4>
+                <p><?=(isset($address_key))?$address_key['value']:''?></p>
               </div>
-
+              
               <div class="email">
                 <i class="icofont-envelope"></i>
-                <h4>Email:</h4>
-                <p>info@muzeyart.uz</p>
+                <h4><?=(isset($email_key))?$email_key['title']:''?></h4>
+                <p><?=(isset($email_key))?$email_key['value']:''?></p>
               </div>
 
               <div class="phone">
                 <i class="icofont-phone"></i>
-                <h4>Telefon:</h4>
-                <p>(+998)71 256-40-42, (+998)71 256-28-58.</p>
+                <h4><?=(isset($phone_key))?$phone_key['title']:''?></h4>
+                <p><?=(isset($phone_key))?$phone_key['value']:''?></p>
               </div>
 
             </div>
@@ -392,7 +370,7 @@ foreach ($post as $key => $one):?>
 
           <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Ism" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -417,8 +395,10 @@ foreach ($post as $key => $one):?>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
               <div class="text-center"><button type="submit">Отправить</button></div>
-            </form>
-
+            </form> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2997.3504307145363!2d69.25686191499922!3d41.30123960929483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8ae1a21ab3e3%3A0xb3c15a54c88bcfd0!2z0JzRg9C30LXQuSDQn9GA0LjQutC70LDQtNC90L7Qs9C-INCY0YHQutGD0YHRgdGC0LLQsA!5e0!3m2!1sru!2s!4v1518956592862" width="100%" height="250px" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+            
+            
           </div>
 
         </div>

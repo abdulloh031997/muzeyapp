@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'language',
                 'filter'=>ArrayHelper::map(\common\models\Language::find()->where(['status'=>1])->all(), 'lang_code', 'name'),
                 'value'=> function($model){
-                    return common\models\Category::getTranslatedLanguages($model->content_id);
+                    return common\models\Collection::getTranslatedLanguages($model->content_id);
                 }
             ],
             [
