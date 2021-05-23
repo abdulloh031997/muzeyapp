@@ -9,6 +9,7 @@
 </section>
 
   <main id="main">
+    
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
       <div class="container">
