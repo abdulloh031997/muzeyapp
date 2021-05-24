@@ -57,6 +57,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            ['role_id', 'integer'],
         ];
     }
 
@@ -180,6 +181,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
+    public function getPassword($password)
+    {
+        return $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+    public function getgenerateAuthKey()
+    {
+        return $this->auth_key = Yii::$app->security->generateRandomString();
+    }
 
     /**
      * Generates "remember me" authentication key
@@ -211,5 +220,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+    public function getRole() 
+    {
+        return $this->hasOne(Role::className(),['id'=>'role_id']);
     }
 }

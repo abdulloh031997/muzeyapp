@@ -2,35 +2,46 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\RoleSearch */
+/* @var $searchModel backend\models\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Roles');
+$this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="role-index">
+<div class="users-index">
 
-   <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; justify-content: space-between;">
         <h3><?= Html::encode($this->title) ?></h3>
-
         <p>
             <?= Html::a(Yii::t('template', 'add'), ['create'], ['class' => 'btn btn-primary btn-sm']) ?>
         </p>
-   </div>
+    </div>
 
-    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn'],
+            ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'name',
+            'username',
+            [
+                'attribute'=>'role_id',
+                'value' =>function($model){
+                    return $model->role->name;
+                }
+            ],
+            'auth_key',
+            'password_hash',
+            //'password_reset_token',
+            //'email:email',
+            //'status',
+            //'created_at',
+            //'updated_at',
+            //'verification_token',
 
             [
                 'class' => 'kartik\grid\ActionColumn',
@@ -77,6 +88,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?php Pjax::end(); ?>
 
 </div>

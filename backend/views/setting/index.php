@@ -11,13 +11,14 @@ $this->title = Yii::t('app', 'Settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setting-index">
-
+<?php if (Yii::$app->user->identity->role->id ===1):?>
     <div style="display: flex; justify-content: space-between;">
         <h3><?= Html::encode($this->title) ?></h3>
         <p>
             <?= Html::a(Yii::t('template', 'add'), ['create'], ['class' => 'btn btn-primary btn-sm']) ?>
         </p>
     </div>
+    <?php endif ?>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

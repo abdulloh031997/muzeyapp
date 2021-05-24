@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
             'author',
+            'url',
             [
                 'attribute'=>'language',
                 'filter'=>ArrayHelper::map(\common\models\Language::find()->where(['status'=>1])->all(), 'lang_code', 'name'),

@@ -88,9 +88,11 @@ if ($model->file != '') {
                     </div>
                 </div>
             </div>
+            <?php if (Yii::$app->user->identity->role->id ===1):?>
             <div class="col-md-12">
                 <?= $form->field($model, 'key')->textInput() ?>
             </div>
+            <?php endif; ?>
             <div class="col-md-12">
                 <?= $form->field($model, 'status')->dropDownList($model->statusArray()) ?>
             </div>

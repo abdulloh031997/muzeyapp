@@ -98,6 +98,9 @@ if ($model->file != '') {
                         <?= $form->field($model, 'collection_category_id')->dropDownList($data) ?>
                     </div>
                     <div class="col-md-12">
+                        <?= $form->field($model, 'url')->textInput() ?>
+                    </div>
+                    <div class="col-md-12">
                         <?= $form->field($model, 'status')->dropDownList($model->statusArray()) ?>
                     </div>
                     <div class="col-md-12">

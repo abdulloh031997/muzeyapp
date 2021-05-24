@@ -19,7 +19,6 @@
                 <li><strong>Ўлчов</strong>: <?=$collection['size']?></li>
                 </ul>
             </div>
-
             </div>
 
             <div class="portfolio-description">
@@ -28,6 +27,7 @@
                 <?//=$collection['body']?>
             </p>
             </div>
+            <iframe src="/finish/1.html" height="1080px" width="100%" title="Iframe Example"></iframe>
 
         </div>
     </section><!-- End Portfolio Details Section -->
